@@ -1,0 +1,23 @@
+.login-container {
+  height: 100vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 13rem;
+  height: 13rem;
+  text-decoration: none;
+
+  margin: 2rem;
+}
+
+.login-card:hover {
+  cursor: pointer;
+  box-shadow:
+    0 2px 4px 0 rgba(0, 0, 0, 0.2),
+    0 2px 8px 0 rgba(0, 0, 0, 0.2);
+}
