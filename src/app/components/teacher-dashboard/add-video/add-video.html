@@ -1,0 +1,29 @@
+<div class="add-video-container">
+  <div class="input-box-container">
+    <!--Note sure what       optionLabel="class name" does -->
+    <p-select
+      class="class-select"
+      [(ngModel)]="selectedClass"
+      [options]="classes"
+      placeholder="Class name"
+      variant="filled"
+    />
+    <input
+      class="url-input"
+      type="text"
+      pInputText
+      [(ngModel)]="inputUrl"
+      placeholder="YouTube URL"
+      variant="filled"
+    />
+  </div>
+
+  <div class="button-container" (click)="onSubmit()">
+    <p-button
+      class="submit-button"
+      label="Submit"
+      severity="primary"
+      [disabled]="selectedClass === '' && inputUrl === ''"
+    ></p-button>
+  </div>
+</div>
