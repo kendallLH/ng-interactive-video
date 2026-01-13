@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { Login } from './components/login/login/login';
 import { StudentDashboard } from './components/student-dashboard/student-dashboard/student-dashboard';
 import { TeacherDashboard } from './components/teacher-dashboard/teacher-dashboard/teacher-dashboard';
-import { VideoPlayer } from './components/video-player/video-player/video-player';
+import { VideoView } from './components/video-view/video-view/video-view';
 
 export const routes: Routes = [
   {
@@ -20,6 +20,6 @@ export const routes: Routes = [
   },
   {
     path: 'player/:userType',
-    component: VideoPlayer,
+    component: VideoView,
   },
 ];
