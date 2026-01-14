@@ -1,6 +1,15 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  Input,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import videojs from 'video.js';
 import Player from 'video.js/dist/types/player';
+import { CommunicationService } from '../../../services/communication/communication-service';
 
 @Component({
   selector: 'app-video-player',
@@ -9,6 +18,8 @@ import Player from 'video.js/dist/types/player';
   styleUrl: './video-player.scss',
 })
 export class VideoPlayer implements AfterViewInit, OnDestroy {
+  private communicationService = inject(CommunicationService);
+
   // Code adapted from: https://videojs.org/guides/angular/
   @ViewChild('target', { static: true }) target: ElementRef;
   // See options: https://videojs.com/guides/options
@@ -26,7 +37,24 @@ export class VideoPlayer implements AfterViewInit, OnDestroy {
 
   // Instantiate a Video.js player OnInit
   ngAfterViewInit() {
-    this.player = videojs(this.target.nativeElement, this.options, function onPlayerReady() {});
+    this.player = videojs(this.target.nativeElement, this.options, function onPlayerReady() {
+      // this.player.on('userinactive', () => {
+      //   console.log('User is inactive, do something with Angular component state');
+      //   // Example: Pause the video
+      //   player.pause();
+      // });
+      // player.on('useractive', () => {
+      //   console.log('User is active again');
+      // })
+      // player.on('loadedmetadata', function () {
+      //  // save the user's place in video
+      //   var savedTime = localStorage.getItem('video-' + this.id() + '-last-time');
+      //   if (savedTime) {
+      //     this.currentTime(savedTime);
+      //   }
+      // });
+    });
+    this.communicationService.setVideoPlayer(this.player);
   }
 
   // Dispose the player OnDestroy
