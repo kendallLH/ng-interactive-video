@@ -7,13 +7,37 @@
   (click)="addInteraction()"
 ></p-button> -->
 
-  <p-speeddial
-    class="add-interaction-button"
-    [model]="items"
-    [radius]="80"
-    type="semi-circle"
-    direction="down"
-    severity="primary"
-    [style]="{ position: 'absolute', left: 'calc(50% - 2rem)', top: 0 }"
-  />
+  <!-- <app-progress-bar></app-progress-bar> -->
+
+  <div class="rename-or-remove-this">
+    <p-speeddial
+      class="add-interaction-button"
+      [model]="items"
+      [radius]="80"
+      type="semi-circle"
+      direction="down"
+      severity="primary"
+    />
+    <!--[style]="{ position: 'absolute', left: 'calc(50% - 2rem)', top: 0 }"-->
+
+    <div class="">
+      <!-- @for (note of notes$ | async; track note.id) { -->
+      @for (note of questions; track note.id) {
+        <div class="note-card-container">
+          <!-- <div class="timestamp-display">
+        <div class="hour-minutes">16</div>
+        <div class="minutes-seconds">59</div>
+      </div> -->
+
+          <div class="note-text-content">
+            <!-- need to set a height on this so text stays to single line. also overflow-->
+            <h4 class="m-0">{{ note.question }}</h4>
+            <div class="">{{ note.id }}</div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
 </div>
+
+<app-interactive-card></app-interactive-card>

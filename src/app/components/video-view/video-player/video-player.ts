@@ -8,7 +8,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import videojs from 'video.js';
-import Player from 'video.js/dist/types/player';
+
+// import Player from 'video.js/dist/types/player';
+import '@filmgardi/videojs-markers';
+
 import { CommunicationService } from '../../../services/communication/communication-service';
 
 @Component({
@@ -33,7 +36,7 @@ export class VideoPlayer implements AfterViewInit, OnDestroy {
       type: string;
     }[];
   };
-  player: Player;
+  player: any; // ugh don't like this but we'll see
 
   // Instantiate a Video.js player OnInit
   ngAfterViewInit() {
@@ -55,6 +58,7 @@ export class VideoPlayer implements AfterViewInit, OnDestroy {
       // });
     });
     this.communicationService.setVideoPlayer(this.player);
+    this.setTimestampMarker();
   }
 
   // Dispose the player OnDestroy
@@ -62,6 +66,41 @@ export class VideoPlayer implements AfterViewInit, OnDestroy {
     if (this.player) {
       this.player.dispose();
     }
+  }
+
+  setTimestampMarker() {
+    this.player.markers({
+      markers: [
+        { time: 10, text: 'Chapter 1 Start', classname: 'my-icon-class' },
+        { time: 35.5, text: 'Key Moment', classname: 'my-icon-class' },
+        { time: 60, text: 'End of Segment', classname: 'my-icon-class' },
+      ],
+    });
+    // Example 1
+    // var duration = this.player.duration(); // Get video duration
+    // var markers = [
+    //   { time: 30, iconClass: 'timestamp-marker', id: 'marker-1' }, // 30 seconds
+    //   { time: 120, iconClass: 'timestamp-marker', id: 'marker-2' }, // 2 minutes
+    // ];
+    // Example 2
+    // var markerContainer = document.querySelector('.timestamp-marker-container');
+    // console.log('marker container', markerContainer);
+    // // Add markers to the container
+    // markers.forEach((marker) => {
+    //   if (duration && marker.time < duration) {
+    //     var markerElement = document.createElement('div');
+    //     markerElement.className = marker.iconClass;
+    //     markerElement.id = marker.id;
+    //     // Calculate left position as a percentage of duration
+    //     var leftPosition = (marker.time / duration) * 100;
+    //     markerElement.style.left = leftPosition + '%';
+    //     // Optional: Add click handler to jump to timestamp
+    //     // markerElement.addEventListener('click', function () {
+    //     //   this.player.currentTime(marker.time);
+    //     // });
+    //     markerContainer?.appendChild(markerElement);
+    //   }
+    // });
   }
 
   testButton() {

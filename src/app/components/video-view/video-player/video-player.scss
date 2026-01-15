@@ -1,0 +1,24 @@
+// video-container {
+//   position: relative;
+//   width: 640px; /* Match video width */
+// }
+
+// .timestamp-marker-container {
+//   position: absolute;
+//   bottom: 50px; /* Position above the control bar */
+//   left: 0;
+//   right: 0;
+//   height: 10px; /* Height of the marker area */
+//   pointer-events: none; /* Allows clicks to pass through to the control bar */
+// }
+
+// .timestamp-marker {
+//   position: absolute;
+//   width: 10px; /* Icon/marker size */
+//   height: 10px;
+//   background-color: red; /* Placeholder for your icon/icon class */
+//   border-radius: 50%;
+//   pointer-events: auto; /* Allows interaction with the marker itself */
+//   cursor: pointer;
+//   transform: translateX(-50%); /* Centers the marker on the exact timestamp point */
+// }

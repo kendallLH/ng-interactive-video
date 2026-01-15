@@ -1,0 +1,31 @@
+<p>interactive-card works!</p>
+<p-card class="interactive-card" header="TEMP HEADER">
+  <!-- Put this in a form group? -->
+  <p-inputgroup>
+    <p-inputgroup-addon>
+      <!-- <i class="pi pi-user"></i> -->
+      A
+    </p-inputgroup-addon>
+    <input pInputText placeholder="Username" />
+  </p-inputgroup>
+
+  <p-inputgroup>
+    <p-inputgroup-addon>B</p-inputgroup-addon>
+    <input pInputText placeholder="Price" />
+  </p-inputgroup>
+
+  <p-inputgroup>
+    <p-inputgroup-addon>C</p-inputgroup-addon>
+    <input pInputText placeholder="Website" />
+  </p-inputgroup>
+
+  <p-inputgroup>
+    <p-inputgroup-addon>D </p-inputgroup-addon>
+    <input pInputText placeholder="Other" />
+  </p-inputgroup>
+
+  <!-- Correct Answer -->
+  <p-inputgroup>
+    <p-select [options]="answers" optionLabel="name" placeholder="Correct Answer" />
+  </p-inputgroup>
+</p-card>

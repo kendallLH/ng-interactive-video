@@ -6,7 +6,63 @@
 }
 
 .video-player-container {
-  display: block;
+  //   display: block;
   width: 70%;
   aspect-ratio: 16/9;
+}
+
+// WIP
+.note-card-container {
+  // Styling
+  width: 100%;
+  height: 6rem;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); // need to use background color with a .5 opacity so that the opacity doesn't affect the title / description child divs
+  border-radius: 10px;
+
+  // Positioning
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.note-card-container:hover {
+  cursor: pointer;
+  background-color: rgb(202, 202, 202);
+}
+
+.note-card-container h4 {
+  margin: 0px;
+}
+
+.note-card-container p {
+  margin: 0px;
+}
+
+.timestamp-display {
+  margin-right: 0.75rem;
+  display: inline-block;
+}
+
+.note-text-content {
+  display: inline-block;
+  height: 2.5rem;
+
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  overflow: hidden; /* Hides any text that overflows the element's box */
+  text-overflow: ellipsis; /* Displays an ellipsis (...) for clipped text */
+  min-width: 0;
+}
+
+.rename-or-remove-this {
+  //   position: absolute;
+  overflow-y: scroll;
+  //   height: 100%;
+  height: calc(100% - 35px); // 100% of container height - height of action items
+  width: 30%; // 100% of the container width which is 30% of the page. need this width so that the nowrap and overflow hidden on the note text works cause it needs a width and this one was missin
 }
