@@ -1,24 +1,20 @@
 <div class="video-view-container">
   <app-video-player class="video-player-container"></app-video-player>
-  <!-- <p-button
-  class="add-interaction-button"
-  label="Add Interaction"
-  severity="primary"
-  (click)="addInteraction()"
-></p-button> -->
 
   <!-- <app-progress-bar></app-progress-bar> -->
 
+  <!-- Right Side Content -->
   <div class="rename-or-remove-this">
-    <p-speeddial
+    <p-button
       class="add-interaction-button"
-      [model]="items"
-      [radius]="80"
-      type="semi-circle"
-      direction="down"
+      label="Add New"
       severity="primary"
-    />
-    <!--[style]="{ position: 'absolute', left: 'calc(50% - 2rem)', top: 0 }"-->
+      (click)="addInteraction()"
+    ></p-button>
+
+    @if (isAddInteraction()) {
+      <app-interactive-card class="interactive-card-positioning"></app-interactive-card>
+    }
 
     <div class="">
       <!-- @for (note of notes$ | async; track note.id) { -->
@@ -39,5 +35,3 @@
     </div>
   </div>
 </div>
-
-<app-interactive-card></app-interactive-card>

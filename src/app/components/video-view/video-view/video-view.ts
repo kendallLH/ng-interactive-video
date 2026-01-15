@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
-// import { ButtonModule } from 'primeng/button';
-import { SpeedDialModule } from 'primeng/speeddial';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
 import { take } from 'rxjs/operators';
 
 import { InteractiveCard } from '../interactive-card/interactive-card';
@@ -9,34 +8,14 @@ import { CommunicationService } from '../../../services/communication/communicat
 
 @Component({
   selector: 'app-video-view',
-  imports: [InteractiveCard, SpeedDialModule, VideoPlayer],
+  imports: [ButtonModule, InteractiveCard, VideoPlayer],
   templateUrl: './video-view.html',
   styleUrl: './video-view.scss',
 })
 export class VideoView {
   private communicationService = inject(CommunicationService);
 
-  // url = 'https://vjs.zencdn.net/v/oceans.mp4';
-  items = [
-    {
-      label: 'Multiple Choice',
-      icon: 'pi pi-plus',
-      command: () => {
-        console.log('Add multiple choice clicked!');
-        // Your add logic here
-        this.addInteraction();
-      },
-    },
-    {
-      label: 'Note',
-      icon: 'pi pi-pencil',
-      command: () => {
-        console.log('Add note choice clicked!');
-        // Your add logic here
-        this.addInteraction();
-      },
-    },
-  ];
+  // url = 'https://vjs.zencdn.net/v/oceans.mp4'
 
   questions = [
     {
@@ -91,10 +70,16 @@ export class VideoView {
       options: ['4', '6', '8'],
     },
   ];
+  // isAddInteraction = signal(false);
+  isAddInteraction: WritableSignal<boolean>;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isAddInteraction = this.communicationService.getShowInteractiveCard();
+  }
 
   addInteraction() {
+    // this.isAddInteraction.set(true);
+    this.communicationService.setShowInteractiveCard(true);
     this.communicationService
       .getVideoPlayer$()
       .pipe(take(1))
@@ -103,6 +88,13 @@ export class VideoView {
         // // TODO: convert timestamp from seconds to 00h00m00s
         player.pause();
         player.currentTime();
+
+        // show form overlayed over video
+        // for now use css positioning, but maybe upgrade to videojs plugin
+        // https://www.npmjs.com/package/videojs-overlay
+        // https://codepen.io/fealaer/pen/RwbKeye
       });
   }
+
+  cancelInteraction() {}
 }

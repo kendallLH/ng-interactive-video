@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -7,6 +7,17 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class CommunicationService {
   // TODO> any type
   private videoPlayer$: BehaviorSubject<any> = new BehaviorSubject<any>({});
+
+  // Signals
+  private showInteractiveCard = signal(false);
+
+  setShowInteractiveCard(shouldShow: boolean) {
+    this.showInteractiveCard.set(shouldShow);
+  }
+
+  getShowInteractiveCard(): WritableSignal<boolean> {
+    return this.showInteractiveCard;
+  }
 
   setVideoPlayer(player: any) {
     // TODO: any type

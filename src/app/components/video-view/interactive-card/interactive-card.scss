@@ -1,3 +1,17 @@
 .interactive-card {
-  width: 20rem;
+  width: 100%;
+}
+
+.time-type-container {
+  display: flex;
+}
+
+.multi-choice-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.time-display {
+  //   width: 30%;
 }

@@ -1,31 +1,72 @@
-<p>interactive-card works!</p>
-<p-card class="interactive-card" header="TEMP HEADER">
-  <!-- Put this in a form group? -->
-  <p-inputgroup>
-    <p-inputgroup-addon>
-      <!-- <i class="pi pi-user"></i> -->
-      A
-    </p-inputgroup-addon>
-    <input pInputText placeholder="Username" />
-  </p-inputgroup>
+<p-card class="interactive-card">
+  <form [formGroup]="interactiveCardForm">
+    <div formGroupName="sharedForm" class="time-type-container">
+      <!-- TODO: prefill -->
+      <p-datepicker
+        class="time-display"
+        inputId="calendar-timeonly"
+        [timeOnly]="true"
+        [showSeconds]="true"
+      />
+      <!-- question type selection goes here (dropdown)-->
+      <p-select
+        [options]="formTypes"
+        placeholder="Type"
+        variant="filled"
+        formControlName="formTypeSelect"
+        default=""
+      />
+    </div>
 
-  <p-inputgroup>
-    <p-inputgroup-addon>B</p-inputgroup-addon>
-    <input pInputText placeholder="Price" />
-  </p-inputgroup>
+    <!-- @switch (interactiveCardForm.get('formTypeSelect')?.value) -->
+    <!-- @switch (signalCommon.formType) {
+      @case ('text') {
+        <input type="text" id="dynamicField" formControlName="dynamicField" />
+      }
+      @case ('number') {
+        <input type="number" id="dynamicField" formControlName="dynamicField" />
+      }
+      @case ('date') {
+        <input type="date" id="dynamicField" formControlName="dynamicField" />
+      }
+      @default {
+        <input type="text" id="dynamicField" formControlName="dynamicField" />
+      }
+    } -->
 
-  <p-inputgroup>
-    <p-inputgroup-addon>C</p-inputgroup-addon>
-    <input pInputText placeholder="Website" />
-  </p-inputgroup>
+    <input pInputText placeholder="Question" />
 
-  <p-inputgroup>
-    <p-inputgroup-addon>D </p-inputgroup-addon>
-    <input pInputText placeholder="Other" />
-  </p-inputgroup>
+    <!-- make these a grid -->
+    <div class="multi-choice-options" formGroupName="multiChoiceForm">
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <!-- <i class="pi pi-user"></i> -->
+          A
+        </p-inputgroup-addon>
+        <input pInputText placeholder="Answer A" formControlName="optionA" />
+      </p-inputgroup>
 
-  <!-- Correct Answer -->
-  <p-inputgroup>
-    <p-select [options]="answers" optionLabel="name" placeholder="Correct Answer" />
-  </p-inputgroup>
+      <p-inputgroup>
+        <p-inputgroup-addon>B</p-inputgroup-addon>
+        <input pInputText placeholder="Answer B" formControlName="optionB" />
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>C</p-inputgroup-addon>
+        <input pInputText placeholder="Answer C" formControlName="optionC" />
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>D</p-inputgroup-addon>
+        <input pInputText placeholder="Answer D" formControlName="optionD" />
+      </p-inputgroup>
+    </div>
+
+    <div>Click A, B, C, or D to select the correct answer</div>
+
+    <div class="interactive-card-buttons" formGroupName="sharedForm">
+      <p-button label="Submit" severity="primary" (click)="submit()"></p-button>
+      <p-button label="Cancel" severity="secondary" (click)="cancel()"></p-button>
+    </div>
+  </form>
 </p-card>

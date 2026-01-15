@@ -1,17 +1,9 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  inject,
-  Input,
-  OnDestroy,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, ViewChild } from '@angular/core';
 import videojs from 'video.js';
 import 'videojs-youtube';
 
 // import Player from 'video.js/dist/types/player';
-import '@filmgardi/videojs-markers';
+// import '@filmgardi/videojs-markers';
 
 import { CommunicationService } from '../../../services/communication/communication-service';
 
