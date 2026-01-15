@@ -16,13 +16,7 @@ import { CommunicationService } from '../../../services/communication/communicat
 export class VideoView {
   private communicationService = inject(CommunicationService);
 
-  videoOptions = {
-    fluid: true,
-    aspectRatio: '16:9',
-    autoplay: false,
-    sources: [{ src: 'https://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' }],
-  };
-  url = 'https://vjs.zencdn.net/v/oceans.mp4';
+  // url = 'https://vjs.zencdn.net/v/oceans.mp4';
   items = [
     {
       label: 'Multiple Choice',
@@ -98,9 +92,7 @@ export class VideoView {
     },
   ];
 
-  ngOnInit() {
-    console.log('in video view parent url is', this.url);
-  }
+  ngOnInit() {}
 
   addInteraction() {
     this.communicationService

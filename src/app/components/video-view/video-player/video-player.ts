@@ -8,6 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import videojs from 'video.js';
+import 'videojs-youtube';
 
 // import Player from 'video.js/dist/types/player';
 import '@filmgardi/videojs-markers';
@@ -21,26 +22,27 @@ import { CommunicationService } from '../../../services/communication/communicat
   styleUrl: './video-player.scss',
 })
 export class VideoPlayer implements AfterViewInit, OnDestroy {
+  @ViewChild('target', { static: true }) target: ElementRef;
   private communicationService = inject(CommunicationService);
 
-  // Code adapted from: https://videojs.org/guides/angular/
-  @ViewChild('target', { static: true }) target: ElementRef;
   // See options: https://videojs.com/guides/options
   // TODO: make a type for these options
-  @Input() options: {
-    fluid: boolean;
-    aspectRatio: string;
-    autoplay: boolean;
-    sources: {
-      src: string;
-      type: string;
-    }[];
+  options = {
+    fluid: true,
+    aspectRatio: '16:9',
+    autoplay: false,
+    // sources: [{ src: 'https://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' }],
+    techOrder: ['youtube'],
+    sources: [{ type: 'video/youtube', src: 'https://youtu.be/__Uw1SXPW7s?si=Bf3uyaaM6V2QszuX' }],
   };
   player: any; // ugh don't like this but we'll see
 
   // Instantiate a Video.js player OnInit
   ngAfterViewInit() {
+    // for youtube
     this.player = videojs(this.target.nativeElement, this.options, function onPlayerReady() {
+      // for non-youtube
+      // this.player = videojs(this.target.nativeElement, this.options, function onPlayerReady() {
       // this.player.on('userinactive', () => {
       //   console.log('User is inactive, do something with Angular component state');
       //   // Example: Pause the video
