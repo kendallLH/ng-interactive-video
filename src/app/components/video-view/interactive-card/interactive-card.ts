@@ -1,4 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, inject, Input, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -9,37 +10,15 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 
 import { CommunicationService } from '../../../services/communication/communication-service';
+import { take } from 'rxjs';
+import { Annotation, NoteContent, QuestionContent } from '../../../models/annotation';
+import { LocalStorage } from '../../../services/local-storage/local-storage';
 
 enum InteractionType {
   multiChoice,
   longForm,
   note,
 }
-
-type MultiChoiceQuestion = {
-  // id: string;
-  timestamp: string;
-  correctAnswer: string;
-  question: string;
-  optionA: string;
-  optionB: string;
-  optionC: string;
-  optionD: string;
-};
-
-type LongFormQuestion = {
-  id: string;
-  timestamp: string;
-  question: string;
-  // answer?: string; // for student
-};
-
-type Note = {
-  id: string;
-  timestamp: string;
-  headline?: string;
-  paragraph?: string;
-};
 
 @Component({
   selector: 'app-interactive-card',
@@ -53,12 +32,16 @@ type Note = {
     ReactiveFormsModule,
     SelectModule,
   ],
+  providers: [DatePipe],
   templateUrl: './interactive-card.html',
   styleUrl: './interactive-card.scss',
 })
 export class InteractiveCard {
   private communicationService = inject(CommunicationService);
+  private datePipe = inject(DatePipe);
+  private localStorage = inject(LocalStorage);
   private formBuilder = inject(FormBuilder);
+  @Input() timestamp: number;
 
   interactionType: InteractionType = InteractionType.multiChoice;
   interactiveCardForm!: FormGroup;
@@ -71,15 +54,19 @@ export class InteractiveCard {
   ];
 
   ngOnInit() {
+    console.log('original timestamp', this.timestamp);
+    // https://stackoverflow.com/questions/52321653/angular-datepipe-convert-seconds-to-time-with-zero-timezone-12-instead-of-00
+    const convertedTimestamp = this.datePipe.transform(this.timestamp * 1000, 'H:mm:ss', 'UTC');
+    console.log('converted timestamp', convertedTimestamp);
     this.interactiveCardForm = this.formBuilder.group({
       sharedForm: this.formBuilder.group({
         // email: ['', [Validators.required, Validators.email]],
         // phone: ['', Validators.required],
         formTypeSelect: [this.formTypes[0]], // TODO - use the constant for this
+        timestampPicker: [convertedTimestamp],
       }),
       multiChoiceForm: this.formBuilder.group({
-        // inputTypeSelector: ['text', Validators.required], // Control to select the type
-        // dynamicField: ['', Validators.required], // The field that changes
+        question: [''],
         optionA: [''],
         optionB: [''],
         optionC: [''],
@@ -105,9 +92,52 @@ export class InteractiveCard {
   }
 
   submit() {
+    // TODO - this is for multiple choice only, need to add an if or switch
     console.log('onSubmit', this.interactiveCardForm.get('multiChoiceForm')?.value);
     // this.myform.reset()
 
+    this.communicationService // should i make this it's own function??
+      .getVideoPlayer$()
+      .pipe(take(1))
+      .subscribe((player: any) => {
+        // TODO: any type
+
+        // If EDIT - would check if this annotation object already exists
+
+        const sharedForm = this.interactiveCardForm.get('sharedForm')?.value;
+        var randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+        const annotationId = randomLetter + Date.now();
+
+        // This works specifically for a multiple choice form
+        // In future would conditionally create contentForm and newContent based on form type
+        const contentForm = this.interactiveCardForm.get('multiChoiceForm')?.value;
+        const newContent = {
+          question: contentForm.question,
+          options: [
+            contentForm.optionA,
+            contentForm.optionB,
+            contentForm.optionC,
+            contentForm.optionD,
+          ],
+          // correctAnswer:
+        };
+
+        const newAnnotation: Annotation = {
+          id: annotationId,
+          content: newContent,
+          timestamp: sharedForm.timestampPicker,
+          videoId: '__Uw1SXPW7s?si=Bf3uyaaM6V2QszuX', // TODO - hardcoding this for now
+        };
+
+        // Update local storage
+        // Update annotations$
+        this.communicationService.setAnnotations(this.localStorage.addListItem(newAnnotation));
+
+        player.play();
+      });
+
+    // TODO clear the card? / reset form this.myform.reset()
+    // Close the card
     this.communicationService.setShowInteractiveCard(false);
   }
 

@@ -4,21 +4,24 @@
   <!-- <app-progress-bar></app-progress-bar> -->
 
   <!-- Right Side Content -->
-  <div class="rename-or-remove-this">
+  <div class="right-content">
     <p-button
-      class="add-interaction-button"
+      class="add-annotation-button"
       label="Add New"
       severity="primary"
-      (click)="addInteraction()"
+      (click)="addAnnotation()"
     ></p-button>
 
-    @if (isAddInteraction()) {
-      <app-interactive-card class="interactive-card-positioning"></app-interactive-card>
+    @if (isAddAnnotation()) {
+      <app-interactive-card
+        class="interactive-card-positioning"
+        [timestamp]="timestamp"
+      ></app-interactive-card>
     }
 
     <div class="">
       <!-- @for (note of notes$ | async; track note.id) { -->
-      @for (note of questions; track note.id) {
+      @for (annotation of annotations$ | async; track annotation.id) {
         <div class="note-card-container">
           <!-- <div class="timestamp-display">
         <div class="hour-minutes">16</div>
@@ -27,8 +30,8 @@
 
           <div class="note-text-content">
             <!-- need to set a height on this so text stays to single line. also overflow-->
-            <h4 class="m-0">{{ note.question }}</h4>
-            <div class="">{{ note.id }}</div>
+            <!-- <h4 class="m-0">{{ annotation.question }}</h4> -->
+            <div class="">{{ annotation.id }}</div>
           </div>
         </div>
       }

@@ -7,6 +7,7 @@
         inputId="calendar-timeonly"
         [timeOnly]="true"
         [showSeconds]="true"
+        formControlName="timestampPicker"
       />
       <!-- question type selection goes here (dropdown)-->
       <p-select
@@ -14,7 +15,6 @@
         placeholder="Type"
         variant="filled"
         formControlName="formTypeSelect"
-        default=""
       />
     </div>
 
@@ -34,11 +34,13 @@
       }
     } -->
 
-    <input pInputText placeholder="Question" />
-
     <!-- make these a grid -->
     <div class="multi-choice-options" formGroupName="multiChoiceForm">
+      <!-- I want to chagne this to be shared and be like a "healdine" -->
+      <input pInputText placeholder="Question" formControlName="question" />
+
       <p-inputgroup>
+        <!-- TODO - change this to a for loop so can loop through options array to add answers -->
         <p-inputgroup-addon>
           <!-- <i class="pi pi-user"></i> -->
           A

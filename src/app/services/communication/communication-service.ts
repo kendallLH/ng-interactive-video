@@ -5,18 +5,25 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CommunicationService {
+  // Observables
+  // TODO any type
+  private annotations$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   // TODO> any type
   private videoPlayer$: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
   // Signals
   private showInteractiveCard = signal(false);
 
-  setShowInteractiveCard(shouldShow: boolean) {
-    this.showInteractiveCard.set(shouldShow);
+  /** Observables */
+
+  setAnnotations(annotations: any) {
+    // TODO: any type
+    this.annotations$.next(annotations);
   }
 
-  getShowInteractiveCard(): WritableSignal<boolean> {
-    return this.showInteractiveCard;
+  getAnnotations$(): Observable<any> {
+    // TODO: any type
+    return this.annotations$.asObservable();
   }
 
   setVideoPlayer(player: any) {
@@ -29,5 +36,15 @@ export class CommunicationService {
     // TODO: any type
     console.log('get video player', this.videoPlayer$);
     return this.videoPlayer$.asObservable();
+  }
+
+  /** Signals */
+
+  setShowInteractiveCard(shouldShow: boolean) {
+    this.showInteractiveCard.set(shouldShow);
+  }
+
+  getShowInteractiveCard(): WritableSignal<boolean> {
+    return this.showInteractiveCard;
   }
 }
