@@ -20,6 +20,8 @@ enum InteractionType {
   note,
 }
 
+// TODO - rename this to annotation-input
+
 @Component({
   selector: 'app-interactive-card',
   imports: [
@@ -37,21 +39,26 @@ enum InteractionType {
   styleUrl: './interactive-card.scss',
 })
 export class InteractiveCard {
+  // Inputs
+  @Input() className: string;
+  @Input() timestamp: number;
+  @Input() videoId: string;
+  // Injections
   private communicationService = inject(CommunicationService);
   private datePipe = inject(DatePipe);
   private localStorage = inject(LocalStorage);
   private formBuilder = inject(FormBuilder);
-  @Input() timestamp: number;
-
+  // Variables
+  classOptions = ['Algebra 1', 'Algebra 2', 'Calculus 1', 'Korean 1'];
   interactionType: InteractionType = InteractionType.multiChoice;
   interactiveCardForm!: FormGroup;
   formTypes = ['Multiple Choice', 'Long Form', 'Note']; // TODO - make constants for these or can i use the enum? not sure since it's a string
-  answers = [
-    { name: 'A', code: 'NY' },
-    { name: 'B', code: 'RM' },
-    { name: 'C', code: 'LDN' },
-    { name: 'D', code: 'IST' },
-  ];
+  // answers = [
+  //   { name: 'A', code: 'NY' },
+  //   { name: 'B', code: 'RM' },
+  //   { name: 'C', code: 'LDN' },
+  //   { name: 'D', code: 'IST' },
+  // ];
 
   ngOnInit() {
     console.log('original timestamp', this.timestamp);
@@ -62,18 +69,17 @@ export class InteractiveCard {
       sharedForm: this.formBuilder.group({
         // email: ['', [Validators.required, Validators.email]],
         // phone: ['', Validators.required],
-        formTypeSelect: [this.formTypes[0]], // TODO - use the constant for this
+        classSelect: [''], // TODO - use the constant for this
+        headline: [''],
         timestampPicker: [convertedTimestamp],
       }),
       multiChoiceForm: this.formBuilder.group({
-        question: [''],
         optionA: [''],
         optionB: [''],
         optionC: [''],
         optionD: [''],
       }),
     });
-    const multiChoiceForm = this.formBuilder.group({});
 
     // const sharedForm = this.formBuilder.group({
     //   // email: ['', [Validators.required, Validators.email]],
@@ -103,7 +109,6 @@ export class InteractiveCard {
         // TODO: any type
 
         // If EDIT - would check if this annotation object already exists
-
         const sharedForm = this.interactiveCardForm.get('sharedForm')?.value;
         var randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
         const annotationId = randomLetter + Date.now();
@@ -112,7 +117,6 @@ export class InteractiveCard {
         // In future would conditionally create contentForm and newContent based on form type
         const contentForm = this.interactiveCardForm.get('multiChoiceForm')?.value;
         const newContent = {
-          question: contentForm.question,
           options: [
             contentForm.optionA,
             contentForm.optionB,
@@ -124,9 +128,11 @@ export class InteractiveCard {
 
         const newAnnotation: Annotation = {
           id: annotationId,
-          content: newContent,
+          className: this.className,
+          dynamicContent: newContent,
+          headline: sharedForm.headline,
           timestamp: sharedForm.timestampPicker,
-          videoId: '__Uw1SXPW7s?si=Bf3uyaaM6V2QszuX', // TODO - hardcoding this for now
+          videoId: this.videoId, // TODO - hardcoding this for now (hardcoded video id)
         };
 
         // Update local storage

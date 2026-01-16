@@ -1,40 +1,40 @@
 <div class="video-view-container">
-  <app-video-player class="video-player-container"></app-video-player>
+  <app-video-player class="video-player-container" [videoId]="videoId"></app-video-player>
 
   <!-- <app-progress-bar></app-progress-bar> -->
 
   <!-- Right Side Content -->
   <div class="right-content">
-    <p-button
-      class="add-annotation-button"
-      label="Add New"
-      severity="primary"
-      (click)="addAnnotation()"
-    ></p-button>
-
     @if (isAddAnnotation()) {
       <app-interactive-card
         class="interactive-card-positioning"
+        [className]="className"
         [timestamp]="timestamp"
+        [videoId]="videoId"
       ></app-interactive-card>
+    } @else {
+      <div>
+        <p-selectbutton
+          [options]="annotationTypeOptions"
+          [(ngModel)]="selectedAnnotationType"
+          [multiple]="false"
+          optionLabel="name"
+          optionValue="value"
+        />
+        <!-- disabled isn't working -->
+        <p-button
+          class="add-annotation-button"
+          label="Add New"
+          severity="primary"
+          (click)="addAnnotation()"
+          [disabled]="selectedAnnotationType === ''"
+        ></p-button>
+      </div>
     }
 
-    <div class="">
-      <!-- @for (note of notes$ | async; track note.id) { -->
-      @for (annotation of annotations$ | async; track annotation.id) {
-        <div class="note-card-container">
-          <!-- <div class="timestamp-display">
-        <div class="hour-minutes">16</div>
-        <div class="minutes-seconds">59</div>
-      </div> -->
-
-          <div class="note-text-content">
-            <!-- need to set a height on this so text stays to single line. also overflow-->
-            <!-- <h4 class="m-0">{{ annotation.question }}</h4> -->
-            <div class="">{{ annotation.id }}</div>
-          </div>
-        </div>
-      }
-    </div>
+    <app-annotation-list
+      class="annotation-list-container"
+      [videoId]="videoId"
+    ></app-annotation-list>
   </div>
 </div>

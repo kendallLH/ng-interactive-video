@@ -1,21 +1,31 @@
 <p-card class="interactive-card">
   <form [formGroup]="interactiveCardForm">
-    <div formGroupName="sharedForm" class="time-type-container">
-      <!-- TODO: prefill -->
-      <p-datepicker
-        class="time-display"
-        inputId="calendar-timeonly"
-        [timeOnly]="true"
-        [showSeconds]="true"
-        formControlName="timestampPicker"
-      />
-      <!-- question type selection goes here (dropdown)-->
-      <p-select
-        [options]="formTypes"
-        placeholder="Type"
-        variant="filled"
-        formControlName="formTypeSelect"
-      />
+    <div formGroupName="sharedForm">
+      <div class="time-type-container">
+        <p-select
+          class="class-select"
+          [options]="classOptions"
+          placeholder="Class name"
+          formControlName="classSelect"
+        />
+        <p-datepicker
+          class="time-display"
+          inputId="calendar-timeonly"
+          [timeOnly]="true"
+          [showSeconds]="true"
+          formControlName="timestampPicker"
+        />
+      </div>
+
+      <div>
+        <!-- I want to chagne this to be shared and be like a "healdine" -->
+        <input
+          class="headline-input"
+          pInputText
+          placeholder="Headline / Question"
+          formControlName="headline"
+        />
+      </div>
     </div>
 
     <!-- @switch (interactiveCardForm.get('formTypeSelect')?.value) -->
@@ -36,9 +46,6 @@
 
     <!-- make these a grid -->
     <div class="multi-choice-options" formGroupName="multiChoiceForm">
-      <!-- I want to chagne this to be shared and be like a "healdine" -->
-      <input pInputText placeholder="Question" formControlName="question" />
-
       <p-inputgroup>
         <!-- TODO - change this to a for loop so can loop through options array to add answers -->
         <p-inputgroup-addon>

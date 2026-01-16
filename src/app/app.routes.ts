@@ -19,7 +19,7 @@ export const routes: Routes = [
     component: TeacherDashboard,
   },
   {
-    path: 'player/:userType',
+    path: 'player/:userType/:id',
     component: VideoView,
   },
 ];

@@ -1,6 +1,8 @@
 export interface Annotation {
   id: string;
-  content: QuestionContent | NoteContent;
+  className: string;
+  dynamicContent: QuestionContent | NoteContent;
+  headline: string;
   timestamp: number;
   videoId: string;
 }
@@ -11,7 +13,6 @@ export interface Annotation {
  * If there is a correct answer and more than one item in the options array, it's multiple choice
  */
 export interface QuestionContent {
-  question: string;
   options: string[];
   correctAnswer?: string;
 }

@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, ElementRef, inject, OnDestroy, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  Input,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import videojs from 'video.js';
 import 'videojs-youtube';
 
@@ -15,24 +23,26 @@ import { CommunicationService } from '../../../services/communication/communicat
 })
 export class VideoPlayer implements AfterViewInit, OnDestroy {
   @ViewChild('target', { static: true }) target: ElementRef;
+  @Input() videoId: string;
   private communicationService = inject(CommunicationService);
 
   // See options: https://videojs.com/guides/options
   // TODO: make a type for these options
-  options = {
-    fluid: true,
-    aspectRatio: '16:9',
-    autoplay: false,
-    // sources: [{ src: 'https://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' }],
-    techOrder: ['youtube'],
-    sources: [{ type: 'video/youtube', src: 'https://youtu.be/__Uw1SXPW7s?si=Bf3uyaaM6V2QszuX' }],
-  };
+
   player: any; // ugh don't like this but we'll see
 
   // Instantiate a Video.js player OnInit
   ngAfterViewInit() {
     // for youtube
-    this.player = videojs(this.target.nativeElement, this.options, function onPlayerReady() {
+    const options = {
+      fluid: true,
+      aspectRatio: '16:9',
+      autoplay: false,
+      // sources: [{ src: 'https://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' }],
+      techOrder: ['youtube'],
+      sources: [{ type: 'video/youtube', src: `https://www.youtube.com/watch?v=${this.videoId}` }],
+    };
+    this.player = videojs(this.target.nativeElement, options, function onPlayerReady() {
       // for non-youtube
       // this.player = videojs(this.target.nativeElement, this.options, function onPlayerReady() {
       // this.player.on('userinactive', () => {

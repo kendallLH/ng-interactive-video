@@ -1,0 +1,23 @@
+<div class="annotation-list">
+  <!-- @for (note of notes$ | async; track note.id) { -->
+  @for (annotation of annotations$ | async; track annotation.id) {
+    <div class="annotation-card-container">
+      <!-- <div class="timestamp-display">
+        <div class="hour-minutes">16</div>
+        <div class="minutes-seconds">59</div>
+      </div> -->
+
+      <div class="annotation-text-content">
+        <!-- need to set a height on this so text stays to single line. also overflow-->
+        <div>
+          <div>{{ annotation.timestamp }}</div>
+          <h4 class="m-0">{{ annotation.headline }}</h4>
+        </div>
+
+        <div class="trash-icon-container" (click)="deleteAnnotation(annotation.id)">
+          <i class="pi pi-trash"></i>
+        </div>
+      </div>
+    </div>
+  }
+</div>

@@ -6,6 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 
 import { Constants } from '../../../shared/constants';
+import { Utilities } from '../../../services/utilities/utilities';
 
 @Component({
   selector: 'app-add-video',
@@ -15,16 +16,12 @@ import { Constants } from '../../../shared/constants';
 })
 export class AddVideo {
   private router = inject(Router);
+  private utilities = inject(Utilities);
   inputUrl: string = '';
   selectedClass: string = '';
 
-  // hardcoded for now
-  // - IDEAL STATE will want to put in a json list as if it's an api to make a mock api call
-  // - OR if not enough time, just put this in a constants file
-  classes = ['Algebra 1', 'Algebra 2', 'Calculus 1', 'Calculus 2', 'Statistics 1'];
-
   onSubmit() {
-    console.log('input url', this.inputUrl);
-    this.router.navigate(['/player', Constants.TEACHER]); // put this on the video tile when it's clicked
+    const videoId = this.utilities.getVideoIdFromYouTubeUrl(this.inputUrl);
+    this.router.navigate(['/player', Constants.TEACHER, videoId]);
   }
 }
