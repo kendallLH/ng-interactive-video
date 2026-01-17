@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
 
 import { Login } from './components/login/login/login';
-import { StudentDashboard } from './components/student-dashboard/student-dashboard/student-dashboard';
-import { TeacherDashboard } from './components/teacher-dashboard/teacher-dashboard/teacher-dashboard';
+import { StudentDashboard } from './components/student/student-dashboard/student-dashboard';
+import { TeacherDashboard } from './components/teacher/teacher-dashboard/teacher-dashboard';
 import { VideoView } from './components/video-view/video-view/video-view';
+import { RouteConstants } from './shared/constants';
 
 export const routes: Routes = [
   {
@@ -19,7 +20,7 @@ export const routes: Routes = [
     component: TeacherDashboard,
   },
   {
-    path: 'player/:userType/:id',
+    path: `${RouteConstants.VIDEO_VIEW}/:userType/:id`,
     component: VideoView,
   },
 ];

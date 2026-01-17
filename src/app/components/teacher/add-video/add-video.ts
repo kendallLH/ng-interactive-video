@@ -5,7 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 
-import { Constants } from '../../../shared/constants';
+import { RouteConstants } from '../../../shared/constants';
 import { Utilities } from '../../../services/utilities/utilities';
 
 @Component({
@@ -22,6 +22,6 @@ export class AddVideo {
 
   onSubmit() {
     const videoId = this.utilities.getVideoIdFromYouTubeUrl(this.inputUrl);
-    this.router.navigate(['/player', Constants.TEACHER, videoId]);
+    this.router.navigate([`/${RouteConstants.VIDEO_VIEW}`, RouteConstants.TEACHER, videoId]);
   }
 }

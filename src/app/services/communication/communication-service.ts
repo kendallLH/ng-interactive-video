@@ -1,13 +1,17 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+import { Video } from '../../models/video';
+import { Annotation } from '../../models/annotation';
+
 @Injectable({
   providedIn: 'root',
 })
 export class CommunicationService {
   // Observables
-  // TODO any type
-  private annotations$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  private annotations$: BehaviorSubject<Annotation[]> = new BehaviorSubject<Annotation[]>([]);
+  private videos$: BehaviorSubject<Video[]> = new BehaviorSubject<Video[]>([]); // TODO: make a videlist type
+
   // TODO> any type
   private videoPlayer$: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
@@ -16,14 +20,20 @@ export class CommunicationService {
 
   /** Observables */
 
-  setAnnotations(annotations: any) {
-    // TODO: any type
+  setAnnotations(annotations: Annotation[]) {
     this.annotations$.next(annotations);
   }
 
-  getAnnotations$(): Observable<any> {
-    // TODO: any type
+  getAnnotations$(): Observable<Annotation[]> {
     return this.annotations$.asObservable();
+  }
+
+  getVideos$(): Observable<Video[]> {
+    return this.videos$.asObservable();
+  }
+
+  setVideos(videos: Video[]) {
+    this.videos$.next(videos);
   }
 
   setVideoPlayer(player: any) {

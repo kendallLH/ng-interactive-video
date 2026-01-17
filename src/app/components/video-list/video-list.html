@@ -1,0 +1,7 @@
+<div class="video-list-container">
+  <div class="video-list-grid">
+    @for (video of videos$ | async; track video.id) {
+      <app-video-card class="video-card-container" [video]="video"></app-video-card>
+    }
+  </div>
+</div>

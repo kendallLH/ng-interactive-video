@@ -1,0 +1,79 @@
+.video-card {
+  max-width: 17rem;
+  max-height: 17rem;
+  overflow: hidden; // this is maninly for the image to not overflow the card on top (without this the image corners are not rounded)
+  margin: auto; // this just centers the entire card on the page
+}
+
+.video-card:hover {
+  // TODO: do a little more on the effects front
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+
+.video-card-image {
+  width: 17rem;
+  height: 9.5rem;
+}
+
+.p-card-body {
+  display: flex;
+  justify-content: center;
+}
+
+:host ::ng-deep {
+  // not sure why it required this here when in other places it doesn't
+  .p-card-title {
+    max-width: 95%;
+    font-weight: bold;
+    font-size: 12px;
+    color: black;
+    display: flex;
+    text-align: center;
+
+    // truncate text TODO: move to it's own global class
+    text-overflow: ellipsis; // TOOD: the ellipsis isn't working
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+/* Images */
+.pi-trash {
+  font-size: 1rem;
+  // color: #dc2626; // red-600
+  // cursor: pointer;
+}
+
+// .pi-trash:hover {
+//   color: white;
+// }
+
+.trash-icon-container {
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  position: relative;
+  margin-top: 0.5rem;
+  margin-left: 14.5rem;
+
+  position: absolute;
+  // margin-top: 0.8rem;
+  // margin-left: -2rem;
+
+  background-color: black;
+  color: white;
+  border-radius: 50px;
+
+  // center the trash icon within the container
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trash-icon-container:hover {
+  background-color: white;
+  color: black; // changes the color of the trash icon
+}

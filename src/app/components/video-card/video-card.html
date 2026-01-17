@@ -1,0 +1,20 @@
+<a routerLink="/annotate/{{ video.id }}">
+  <p-card header="Simple Card" class="video-card">
+    <ng-template #header>
+      <img alt="Card" class="w-full video-card-image" src="{{ video.thumbnail }}" />
+    </ng-template>
+    <ng-template #title class="card-title">
+      {{ video.title }}
+      <div class="trash-icon-container" (click)="removeVideo(video.id)">
+        <i class="pi pi-trash"></i>
+      </div>
+    </ng-template>
+
+    <!-- <ng-template #subtitle> Card subtitle </ng-template> -->
+    <!-- <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error
+    repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione
+    quam perferendis esse, cupiditate neque quas!
+  </p> -->
+  </p-card>
+</a>

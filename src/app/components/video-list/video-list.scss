@@ -1,0 +1,10 @@
+.video-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+  justify-content: center;
+  margin-top: 4rem; // TODO: may need to make dynamic for all screen sizes later
+}
+
+.video-card-container {
+  margin: 1rem;
+}
