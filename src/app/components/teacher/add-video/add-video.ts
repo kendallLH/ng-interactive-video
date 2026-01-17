@@ -5,8 +5,12 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 
-import { RouteConstants } from '../../../shared/constants';
+import { Course } from '../../../models/course';
+import { Video } from '../../../models/video';
+import { LocalStorageConstants, RouteConstants } from '../../../shared/constants';
 import { Utilities } from '../../../services/utilities/utilities';
+import { YoutubeDataApi } from '../../../services/youtube-data-api/youtube-data-api';
+import { LocalStorage } from '../../../services/local-storage/local-storage';
 
 @Component({
   selector: 'app-add-video',
@@ -15,13 +19,37 @@ import { Utilities } from '../../../services/utilities/utilities';
   styleUrl: './add-video.scss',
 })
 export class AddVideo {
+  private localStorage = inject(LocalStorage);
   private router = inject(Router);
   private utilities = inject(Utilities);
+  private youtubeDataApi = inject(YoutubeDataApi);
   inputUrl: string = '';
   selectedClass: string = '';
 
   onSubmit() {
     const videoId = this.utilities.getVideoIdFromYouTubeUrl(this.inputUrl);
+    this.youtubeDataApi.fetchVideoDetails(videoId).subscribe((data: any) => {
+      const thumbnail = data.items[0].snippet.thumbnails.medium.url;
+      const title = data.items[0].snippet.title;
+
+      // TODO - video shoudl not be submitted until annotations are done, but teachers need to be able to see in progress videos
+      // hardcoded for now
+      const course: Course = {
+        id: 'course1',
+        name: 'Korean 1',
+        teacherId: 'abc123',
+      };
+      // Update local storage with the new item
+      // TODO: prevent duplicates
+      const videoDetails: Video = {
+        // TODO: add description too?
+        id: videoId,
+        course,
+        title,
+        thumbnail,
+      };
+      this.localStorage.addListItem(LocalStorageConstants.VIDEOS, videoDetails);
+    });
     this.router.navigate([`/${RouteConstants.VIDEO_VIEW}`, RouteConstants.TEACHER, videoId]);
   }
 }

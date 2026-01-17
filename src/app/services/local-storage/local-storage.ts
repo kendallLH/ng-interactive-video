@@ -1,8 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 
 import { Annotation } from '../../models/annotation';
-// import { Video } from '../models/video';
-import { CommunicationService } from '../communication/communication-service';
+import { Video } from '../../models/video';
 import { LocalStorageConstants } from '../../shared/constants';
 
 @Injectable({
@@ -33,10 +32,10 @@ export class LocalStorage {
    * Will add a new item to an existing list in local storage. If the list does not yet exist,
    * it will create it and initialize it with the passed in item.
    */
-  addListItem(item: Annotation) {
-    const items = this.getListItems(LocalStorageConstants.ANNOTATIONS) || [];
+  addListItem(key: string, item: Annotation | Video) {
+    const items = this.getListItems(key) || [];
     items.push(item);
-    this.setItem(LocalStorageConstants.ANNOTATIONS, items);
+    this.setItem(key, items);
     return items;
   }
 

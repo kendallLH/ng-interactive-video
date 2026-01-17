@@ -13,6 +13,7 @@ import { CommunicationService } from '../../../services/communication/communicat
 import { take } from 'rxjs';
 import { Annotation, NoteContent, QuestionContent } from '../../../models/annotation';
 import { LocalStorage } from '../../../services/local-storage/local-storage';
+import { LocalStorageConstants } from '../../../shared/constants';
 
 enum InteractionType {
   multiChoice,
@@ -137,7 +138,9 @@ export class InteractiveCard {
 
         // Update local storage
         // Update annotations$
-        this.communicationService.setAnnotations(this.localStorage.addListItem(newAnnotation));
+        this.communicationService.setAnnotations(
+          this.localStorage.addListItem(LocalStorageConstants.ANNOTATIONS, newAnnotation),
+        );
 
         player.play();
       });
