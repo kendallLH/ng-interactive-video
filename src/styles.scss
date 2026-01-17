@@ -1,3 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../node_modules/primeicons/primeicons.css';
 @import 'video.js/dist/video-js.css';
+
+// Used in:
+// teacher/video-view/video-view
+// student/student-video-view
+.video-view-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.video-player-container {
+  width: 70%;
+  aspect-ratio: 16/9;
+}

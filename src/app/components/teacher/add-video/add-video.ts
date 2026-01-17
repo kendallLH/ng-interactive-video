@@ -6,7 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 
 import { Course } from '../../../models/course';
-import { Video } from '../../../models/video';
+import { Status, Video } from '../../../models/video';
 import { LocalStorageConstants, RouteConstants } from '../../../shared/constants';
 import { Utilities } from '../../../services/utilities/utilities';
 import { YoutubeDataApi } from '../../../services/youtube-data-api/youtube-data-api';
@@ -42,14 +42,14 @@ export class AddVideo {
       // Update local storage with the new item
       // TODO: prevent duplicates
       const videoDetails: Video = {
-        // TODO: add description too?
         id: videoId,
         course,
+        status: Status.TeacherInProgress,
         title,
         thumbnail,
       };
       this.localStorage.addListItem(LocalStorageConstants.VIDEOS, videoDetails);
     });
-    this.router.navigate([`/${RouteConstants.VIDEO_VIEW}`, RouteConstants.TEACHER, videoId]);
+    this.router.navigate([`/${RouteConstants.VIDEO_VIEW}/teacher`, videoId]);
   }
 }
