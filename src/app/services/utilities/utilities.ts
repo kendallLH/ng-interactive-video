@@ -4,6 +4,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class Utilities {
+  getSecondsFromHHMMSS(timeString: string): number {
+    const [hours, minutes, seconds] = timeString.split(':').map(Number);
+    return hours * 3600 + minutes * 60 + seconds;
+  }
+
   getVideoIdFromYouTubeUrl(url: string): string {
     const urlObj = new URL(url);
     if (urlObj.hostname === 'youtu.be') {

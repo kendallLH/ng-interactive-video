@@ -10,7 +10,10 @@ export class YoutubeDataApi {
 
   fetchVideoDetails(videoId: string): any {
     // TODO: Define proper return type
-    const url = `${this.youtubeApiUrl}/videos?id=${videoId}&part=snippet,contentDetails,statistics&key=AIzaSyD4LFgVg5FxTnBT2mvxozbIOE3mwqy4cp0`;
+    // Note: Storing the key in this way is generally bad practice
+    // // This one is okay because it's restricted and temporary
+    // // however, for a production app it would not be stored in plain text on the front end
+    const url = `${this.youtubeApiUrl}/videos?id=${videoId}&part=snippet,contentDetails,statistics&key=AIzaSyBg-6hXNVZpvsNREVbUrlJ0B-EB80jHYwU`;
     return this.http.get(url);
   }
 }

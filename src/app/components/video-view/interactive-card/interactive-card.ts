@@ -8,12 +8,13 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-
-import { CommunicationService } from '../../../services/communication/communication-service';
 import { take } from 'rxjs';
+
 import { Annotation, NoteContent, QuestionContent } from '../../../models/annotation';
-import { LocalStorage } from '../../../services/local-storage/local-storage';
 import { LocalStorageConstants } from '../../../shared/constants';
+import { CommunicationService } from '../../../services/communication/communication-service';
+import { LocalStorage } from '../../../services/local-storage/local-storage';
+import { Utilities } from '../../../services/utilities/utilities';
 
 enum InteractionType {
   multiChoice,
@@ -49,17 +50,12 @@ export class InteractiveCard {
   private datePipe = inject(DatePipe);
   private localStorage = inject(LocalStorage);
   private formBuilder = inject(FormBuilder);
+  private utilities = inject(Utilities);
   // Variables
   classOptions = ['Algebra 1', 'Algebra 2', 'Calculus 1', 'Korean 1'];
   interactionType: InteractionType = InteractionType.multiChoice;
   interactiveCardForm!: FormGroup;
   formTypes = ['Multiple Choice', 'Long Form', 'Note']; // TODO - make constants for these or can i use the enum? not sure since it's a string
-  // answers = [
-  //   { name: 'A', code: 'NY' },
-  //   { name: 'B', code: 'RM' },
-  //   { name: 'C', code: 'LDN' },
-  //   { name: 'D', code: 'IST' },
-  // ];
 
   ngOnInit() {
     console.log('original timestamp', this.timestamp);
@@ -127,12 +123,15 @@ export class InteractiveCard {
           // correctAnswer:
         };
 
+        console.log('timestamp', sharedForm.timestampPicker);
+        const timestampInSeconds = this.utilities.getSecondsFromHHMMSS(sharedForm.timestampPicker);
+
         const newAnnotation: Annotation = {
           id: annotationId,
           className: this.className,
           dynamicContent: newContent,
           headline: sharedForm.headline,
-          timestamp: sharedForm.timestampPicker,
+          timestamp: timestampInSeconds,
           videoId: this.videoId, // TODO - hardcoding this for now (hardcoded video id)
         };
 
