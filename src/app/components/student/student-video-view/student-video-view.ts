@@ -10,8 +10,7 @@ import {
 } from '@angular/core';
 
 import { AnnotationOverlay } from '../annotation-overlay/annotation-overlay';
-import { VideoPlayer } from '../../video-view/video-player/video-player';
-
+import { VideoPlayer } from '../../shared/video-player/video-player';
 import { Annotation, UserResponse } from '../../../models/annotation';
 import { LocalStorageConstants } from '../../../shared/constants';
 import { CommunicationService } from '../../../services/communication/communication-service';
