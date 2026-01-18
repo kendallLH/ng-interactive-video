@@ -3,9 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { SelectButtonModule } from 'primeng/selectbutton';
 
-import { AnnotationList } from '../annotation-list/annotation-list';
+import { AnnotationList } from '../../video-view/annotation-list/annotation-list';
 import { AnnotationInput } from '../annotation-input/annotation-input';
-import { VideoPlayer } from '../video-player/video-player';
+import { VideoPlayer } from '../../video-view/video-player/video-player';
 import { CommunicationService } from '../../../services/communication/communication-service';
 import { Utilities } from '../../../services/utilities/utilities';
 import { take } from 'rxjs/operators';
