@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject, Input, signal, ViewChild } from '@angular/core';
+import { Component, inject, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -7,21 +7,15 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputTextModule } from 'primeng/inputtext';
-import { PopoverModule } from 'primeng/popover';
+import { Popover, PopoverModule } from 'primeng/popover';
 import { SelectModule } from 'primeng/select';
 import { take } from 'rxjs';
 
-import { Annotation, NoteContent, QuestionContent } from '../../../models/annotation';
+import { Annotation } from '../../../models/annotation';
 import { LocalStorageConstants } from '../../../shared/constants';
 import { CommunicationService } from '../../../services/communication/communication-service';
 import { LocalStorage } from '../../../services/local-storage/local-storage';
 import { Utilities } from '../../../services/utilities/utilities';
-
-enum InteractionType {
-  multiChoice,
-  longForm,
-  note,
-}
 
 @Component({
   selector: 'app-annotation-input',
@@ -41,8 +35,7 @@ enum InteractionType {
   styleUrl: './annotation-input.scss',
 })
 export class AnnotationInput {
-  @ViewChild('popover') annotationPopover: PopoverModule;
-
+  @ViewChild('popover') annotationPopover: Popover;
   // Inputs
   @Input() timestamp: number;
   @Input() videoId: string;
@@ -54,14 +47,15 @@ export class AnnotationInput {
   private utilities = inject(Utilities);
   // Variables
   classOptions = ['Algebra 1', 'Algebra 2', 'Calculus 1', 'Korean 1'];
-  interactionType: InteractionType = InteractionType.multiChoice;
   annotationInputForm!: FormGroup;
   annotationTypeOptions = ['Multiple Choice']; // TODO - make constants for these or can i use the enum? not sure since it's a string
   // In future will have
   // 'Long Form', 'Note'
+  correctAnswer: string = '';
   showPopover: boolean = false;
 
   ngOnInit() {
+    this.setCorrectAnswer('');
     console.log('original timestamp', this.timestamp);
     // https://stackoverflow.com/questions/52321653/angular-datepipe-convert-seconds-to-time-with-zero-timezone-12-instead-of-00
     const convertedTimestamp = this.datePipe.transform(
@@ -128,7 +122,7 @@ export class AnnotationInput {
             contentForm.optionC,
             contentForm.optionD,
           ],
-          // correctAnswer:
+          correctAnswer: this.correctAnswer,
         };
 
         console.log('timestamp', sharedForm.timestampPicker);
@@ -154,13 +148,21 @@ export class AnnotationInput {
 
     // TODO clear the card? / reset form this.myform.reset()
     // Close the card
-    this.communicationService.setShowInteractiveCard(false);
+    this.communicationService.setShowInteractiveCard(false); // tODO - don't need this anymore
+    this.setCorrectAnswer('');
     // this.showPopover = true;
+    this.annotationPopover.hide();
   }
 
   cancel() {
     this.communicationService.setShowInteractiveCard(false);
     // this.myform.reset()
     // this.showPopover = false;
+    this.setCorrectAnswer('');
+    this.annotationPopover.hide();
+  }
+
+  setCorrectAnswer(correctAnswer: string) {
+    this.correctAnswer = correctAnswer;
   }
 }

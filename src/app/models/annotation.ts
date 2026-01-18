@@ -13,7 +13,7 @@ export interface Annotation {
  */
 export interface QuestionContent {
   options: string[];
-  correctAnswer?: string;
+  correctAnswer: string;
 }
 
 export interface NoteContent {
