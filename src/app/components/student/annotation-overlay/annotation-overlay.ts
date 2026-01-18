@@ -2,7 +2,7 @@ import { Component, Input, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 
-import { Annotation } from '../../../../models/annotation';
+import { Annotation } from '../../../models/annotation';
 
 @Component({
   selector: 'app-annotation-overlay',

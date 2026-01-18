@@ -10,12 +10,13 @@ import {
 } from '@angular/core';
 
 import { AnnotationOverlay } from '../annotation-overlay/annotation-overlay';
-import { Annotation, UserResponse } from '../../../../models/annotation';
-import { LocalStorageConstants } from '../../../../shared/constants';
-import { VideoPlayer } from '../../../video-view/video-player/video-player';
-import { CommunicationService } from '../../../../services/communication/communication-service';
-import { LocalStorage } from '../../../../services/local-storage/local-storage';
-import { Utilities } from '../../../../services/utilities/utilities';
+import { VideoPlayer } from '../../video-view/video-player/video-player';
+
+import { Annotation, UserResponse } from '../../../models/annotation';
+import { LocalStorageConstants } from '../../../shared/constants';
+import { CommunicationService } from '../../../services/communication/communication-service';
+import { LocalStorage } from '../../../services/local-storage/local-storage';
+import { Utilities } from '../../../services/utilities/utilities';
 
 @Component({
   selector: 'app-student-video-view',
