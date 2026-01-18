@@ -1,36 +1,33 @@
 <div class="video-view-container">
-  <app-video-player class="video-player-container" [videoId]="videoId"></app-video-player>
+  <div class="left-content">
+    <!-- TODO change this class -->
+    <app-video-player class="video-player-container" [videoId]="videoId"></app-video-player>
+    <app-annotation-input
+      class="annotation-popover-container"
+      [timestamp]="timestamp"
+      [videoId]="videoId"
+    ></app-annotation-input>
 
-  <!-- <app-progress-bar></app-progress-bar> -->
-
-  <!-- Right Side Content -->
-  <div class="right-content">
-    @if (isAddAnnotation()) {
+    <!-- @if (isAddAnnotation()) {
       <app-annotation-input
         class="annotation-input-positioning"
         [timestamp]="timestamp"
         [videoId]="videoId"
       ></app-annotation-input>
-    } @else {
-      <div>
-        <p-selectbutton
-          [options]="annotationTypeOptions"
-          [(ngModel)]="selectedAnnotationType"
-          [multiple]="false"
-          optionLabel="name"
-          optionValue="value"
-        />
-        <!-- disabled isn't working -->
-        <p-button
-          class="add-annotation-button"
-          label="Add New"
-          severity="primary"
-          (click)="addAnnotation()"
-          [disabled]="selectedAnnotationType === ''"
-        ></p-button>
-      </div>
-    }
+    } @else { -->
+    <!-- <p-button
+        class="add-annotation-button"
+        label="Add Annotation"
+        severity="primary"
+        (click)="addAnnotation()"
+      ></p-button> -->
+    <!-- } -->
+  </div>
 
+  <!-- <app-progress-bar></app-progress-bar> -->
+
+  <!-- Right Side Content -->
+  <div class="right-content">
     <app-annotation-list
       class="annotation-list-container"
       [videoId]="videoId"

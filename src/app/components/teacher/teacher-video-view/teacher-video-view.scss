@@ -3,6 +3,12 @@
   display: inline-block;
 }
 
+.left-content {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
 .right-content {
   height: 80%;
   width: 35%; // 100% of the container width which is 30% of the page. need this width so that the nowrap and overflow hidden on the note text works cause it needs a width and this one was missin
@@ -13,4 +19,9 @@
   //   height: 60%;
   height: calc(100vh - 30px); // vh minus the height of the bar on top
   display: flex;
+}
+
+.annotation-popover-container {
+  display: flex;
+  justify-content: center;
 }

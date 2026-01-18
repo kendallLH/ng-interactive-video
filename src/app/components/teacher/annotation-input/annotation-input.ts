@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject, Input, signal } from '@angular/core';
+import { Component, inject, Input, signal, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -7,6 +7,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputTextModule } from 'primeng/inputtext';
+import { PopoverModule } from 'primeng/popover';
 import { SelectModule } from 'primeng/select';
 import { take } from 'rxjs';
 
@@ -31,6 +32,7 @@ enum InteractionType {
     InputGroupAddonModule,
     InputGroupModule,
     InputTextModule,
+    PopoverModule,
     ReactiveFormsModule,
     SelectModule,
   ],
@@ -39,6 +41,8 @@ enum InteractionType {
   styleUrl: './annotation-input.scss',
 })
 export class AnnotationInput {
+  @ViewChild('popover') annotationPopover: PopoverModule;
+
   // Inputs
   @Input() timestamp: number;
   @Input() videoId: string;
@@ -52,18 +56,25 @@ export class AnnotationInput {
   classOptions = ['Algebra 1', 'Algebra 2', 'Calculus 1', 'Korean 1'];
   interactionType: InteractionType = InteractionType.multiChoice;
   annotationInputForm!: FormGroup;
-  formTypes = ['Multiple Choice', 'Long Form', 'Note']; // TODO - make constants for these or can i use the enum? not sure since it's a string
+  annotationTypeOptions = ['Multiple Choice']; // TODO - make constants for these or can i use the enum? not sure since it's a string
+  // In future will have
+  // 'Long Form', 'Note'
+  showPopover: boolean = false;
 
   ngOnInit() {
     console.log('original timestamp', this.timestamp);
     // https://stackoverflow.com/questions/52321653/angular-datepipe-convert-seconds-to-time-with-zero-timezone-12-instead-of-00
-    const convertedTimestamp = this.datePipe.transform(this.timestamp * 1000, 'H:mm:ss', 'UTC');
+    const convertedTimestamp = this.datePipe.transform(
+      (this.timestamp | 0) * 1000,
+      'H:mm:ss',
+      'UTC',
+    );
     console.log('converted timestamp', convertedTimestamp);
     this.annotationInputForm = this.formBuilder.group({
       sharedForm: this.formBuilder.group({
         // email: ['', [Validators.required, Validators.email]],
         // phone: ['', Validators.required],
-        classSelect: [''], // TODO - use the constant for this
+        annotationTypeSelect: [this.annotationTypeOptions[0]], // TODO - use the constant for this
         headline: [''],
         timestampPicker: [convertedTimestamp],
       }),
@@ -137,16 +148,19 @@ export class AnnotationInput {
           this.localStorage.addListItem(LocalStorageConstants.ANNOTATIONS, newAnnotation),
         );
 
+        // this.annotationPopover.toggle();
         player.play();
       });
 
     // TODO clear the card? / reset form this.myform.reset()
     // Close the card
     this.communicationService.setShowInteractiveCard(false);
+    // this.showPopover = true;
   }
 
   cancel() {
     this.communicationService.setShowInteractiveCard(false);
     // this.myform.reset()
+    // this.showPopover = false;
   }
 }

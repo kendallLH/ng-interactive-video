@@ -10,7 +10,9 @@
       <div class="annotation-text-content">
         <!-- need to set a height on this so text stays to single line. also overflow-->
         <div>
-          <div>{{ annotation.timestamp }}</div>
+          <div>
+            {{ annotation.timestamp * 1000 | date: 'H:mm:ss' : 'UTC' }}
+          </div>
           <h4 class="m-0">{{ annotation.headline }}</h4>
         </div>
 

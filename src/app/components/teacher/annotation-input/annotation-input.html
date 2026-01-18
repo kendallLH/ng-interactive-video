@@ -1,12 +1,14 @@
-<p-card class="annotation-input">
-  <form [formGroup]="annotationInputForm">
+<p-popover #popover>
+  <!-- <ng-template #content>
+        <h4>Custom Content</h4>
+    </ng-template> -->
+  <form [formGroup]="annotationInputForm" class="input-form-container">
     <div formGroupName="sharedForm">
       <div class="time-type-container">
         <p-select
-          class="class-select"
-          [options]="classOptions"
-          placeholder="Class name"
-          formControlName="classSelect"
+          [options]="annotationTypeOptions"
+          placeholder="Question Type"
+          formControlName="annotationTypeSelect"
         />
         <p-datepicker
           class="time-display"
@@ -75,8 +77,84 @@
     <div>Click A, B, C, or D to select the correct answer</div>
 
     <div class="annotation-input-buttons" formGroupName="sharedForm">
+      <p-button
+        label="Submit"
+        severity="primary"
+        (click)="submit(); popover.toggle($event)"
+      ></p-button>
+      <p-button
+        label="Cancel"
+        severity="secondary"
+        (click)="cancel(); popover.toggle($event)"
+      ></p-button>
+    </div>
+  </form>
+</p-popover>
+<p-button
+  (click)="popover.toggle($event)"
+  icon="pi pi-pen-to-square"
+  label="Add Annotation"
+></p-button>
+
+<!-- <p-card class="annotation-input">
+  <form [formGroup]="annotationInputForm">
+    <div formGroupName="sharedForm">
+      <div class="time-type-container">
+        <p-select
+          [options]="annotationTypeOptions"
+          placeholder="Question Type"
+          formControlName="annotationTypeSelect"
+        />
+        <p-datepicker
+          class="time-display"
+          inputId="calendar-timeonly"
+          [timeOnly]="true"
+          [showSeconds]="true"
+          formControlName="timestampPicker"
+          dataType="string"
+        />
+      </div>
+
+      <div>
+        <input
+          class="headline-input"
+          pInputText
+          placeholder="Headline / Question"
+          formControlName="headline"
+        />
+      </div>
+    </div>
+
+
+    <div class="multi-choice-options" formGroupName="multiChoiceForm">
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          A
+        </p-inputgroup-addon>
+        <input pInputText placeholder="Answer A" formControlName="optionA" />
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>B</p-inputgroup-addon>
+        <input pInputText placeholder="Answer B" formControlName="optionB" />
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>C</p-inputgroup-addon>
+        <input pInputText placeholder="Answer C" formControlName="optionC" />
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>D</p-inputgroup-addon>
+        <input pInputText placeholder="Answer D" formControlName="optionD" />
+      </p-inputgroup>
+    </div>
+
+    <div>Click A, B, C, or D to select the correct answer</div>
+
+    <div class="annotation-input-buttons" formGroupName="sharedForm">
       <p-button label="Submit" severity="primary" (click)="submit()"></p-button>
       <p-button label="Cancel" severity="secondary" (click)="cancel()"></p-button>
     </div>
   </form>
-</p-card>
+</p-card> -->

@@ -1,7 +1,6 @@
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { SelectButtonModule } from 'primeng/selectbutton';
 
 import { AnnotationList } from '../annotation-list/annotation-list';
 import { AnnotationInput } from '../annotation-input/annotation-input';
@@ -12,14 +11,7 @@ import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-video-view',
-  imports: [
-    AnnotationList,
-    ButtonModule,
-    FormsModule,
-    AnnotationInput,
-    SelectButtonModule,
-    VideoPlayer,
-  ],
+  imports: [AnnotationList, ButtonModule, FormsModule, AnnotationInput, VideoPlayer],
   templateUrl: './teacher-video-view.html',
   styleUrl: './teacher-video-view.scss',
 })
@@ -32,7 +24,6 @@ export class TeacherVideoView {
   isAddAnnotation: WritableSignal<boolean>;
   timestamp: number;
   videoId: string;
-  selectedAnnotationType: string;
 
   ngOnInit() {
     // Connect to the signal that tells us if add annotation box should be open or closed
