@@ -27,7 +27,6 @@ export class VideoPlayer implements AfterViewInit, OnDestroy {
   private communicationService = inject(CommunicationService);
 
   // See options: https://videojs.com/guides/options
-  // TODO: make a type for these options
 
   player: any; // ugh don't like this but we'll see
 

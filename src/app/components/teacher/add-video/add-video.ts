@@ -24,6 +24,8 @@ export class AddVideo {
   private utilities = inject(Utilities);
   private youtubeDataApi = inject(YoutubeDataApi);
   inputUrl: string = '';
+  // put this in a mocks folder or something
+  classOptions = ['Algebra 1', 'Algebra 2', 'Calculus 1', 'Korean 1'];
   selectedClass: string = '';
 
   onSubmit() {
@@ -34,9 +36,12 @@ export class AddVideo {
 
       // TODO - video shoudl not be submitted until annotations are done, but teachers need to be able to see in progress videos
       // hardcoded for now
+      // todo - use the selected class name to find the right course from the course list
+      // in theory course list would be grabbed on init of user and stored in a service
+      // for now it's hard coded, but mimics if we had grabbed it from an api on load of the user's account
       const course: Course = {
         id: 'course1',
-        name: 'Korean 1',
+        name: this.selectedClass,
         teacherId: 'abc123',
       };
       // Update local storage with the new item

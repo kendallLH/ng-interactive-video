@@ -29,7 +29,6 @@ export class TeacherVideoView {
   private utilities = inject(Utilities);
 
   annotationTypeOptions: any[] = [{ name: 'Multi-Choice', value: 1 }];
-  className = 'Generic Class'; // TODO - need to send the classname to a shared service or something w/ video info this is jsut hardcoded
   isAddAnnotation: WritableSignal<boolean>;
   timestamp: number;
   videoId: string;

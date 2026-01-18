@@ -24,30 +24,23 @@ export class AnnotationList implements OnInit {
   annotations$: Observable<any>;
 
   ngOnInit() {
-    // THIS WORKS
-    // // Connect to annotations$ observable stream
-    // this.annotations$ = this.communicationService.getAnnotations$();
-    // // Get the current annotations
-    // const storedAnnotations = this.localStorage.getListItems(LocalStorageConstants.ANNOTATIONS);
-    // if (storedAnnotations && storedAnnotations.length > 0) {
-    //   // Send the current annotations down the observable stream
-    //   this.communicationService.setAnnotations(storedAnnotations);
-    // }
-
     // TODO - unsubscribe
-    this.annotations$ = this.communicationService // TODO - should this code be inside this observable or outside of it?
-      .getAnnotations$()
-      .pipe(
-        map((annotations) => {
-          if (annotations.length === 0) {
-            annotations = this.localStorage.getListItems(LocalStorageConstants.ANNOTATIONS);
-          }
-          const filteredAnnotations = annotations.filter(
-            (annotation: Annotation) => annotation.videoId === this.videoId,
-          );
-          return filteredAnnotations;
-        }),
-      ); // don't need subscribe cause of async pipe
+    this.annotations$ = this.communicationService.getAnnotations$().pipe(
+      map((annotations) => {
+        if (annotations.length === 0) {
+          annotations = this.localStorage.getListItems(LocalStorageConstants.ANNOTATIONS);
+        }
+        // Get the annotations associated with this video
+        const filteredAnnotations = annotations.filter(
+          (annotation: Annotation) => annotation.videoId === this.videoId,
+        );
+        // Sort the annotations by ascending timestamp
+        filteredAnnotations.sort((a: Annotation, b: Annotation) => {
+          return a.timestamp - b.timestamp;
+        });
+        return filteredAnnotations;
+      }),
+    ); // don't need unsubscribe cause of async pipe
   }
 
   deleteAnnotation(annotationId: string) {
@@ -60,8 +53,6 @@ export class AnnotationList implements OnInit {
       annotationId,
     );
 
-    // need to update the page here or something
-    // make sur you update the observable whenever local storage is updated
     this.communicationService.setAnnotations(updatedAnnotations);
   }
 }

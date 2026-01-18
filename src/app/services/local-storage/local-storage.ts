@@ -27,7 +27,6 @@ export class LocalStorage {
     return JSON.parse(item);
   }
 
-  // TODO - modify to work with videos]
   /**
    * Will add a new item to an existing list in local storage. If the list does not yet exist,
    * it will create it and initialize it with the passed in item.

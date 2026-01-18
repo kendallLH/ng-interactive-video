@@ -1,6 +1,5 @@
 export interface Annotation {
   id: string;
-  className: string; // TODO is this needed if have videoid?
   dynamicContent: QuestionContent | NoteContent;
   headline: string;
   timestamp: number;

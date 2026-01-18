@@ -1,5 +1,11 @@
 <div class="add-video-container">
   <div class="input-box-container">
+    <p-select
+      class="class-select"
+      [options]="classOptions"
+      placeholder="Class Name"
+      [(ngModel)]="selectedClass"
+    />
     <input
       class="url-input"
       type="text"

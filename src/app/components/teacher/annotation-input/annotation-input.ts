@@ -22,8 +22,6 @@ enum InteractionType {
   note,
 }
 
-// TODO - rename this to annotation-input
-
 @Component({
   selector: 'app-annotation-input',
   imports: [
@@ -42,7 +40,6 @@ enum InteractionType {
 })
 export class AnnotationInput {
   // Inputs
-  @Input() className: string;
   @Input() timestamp: number;
   @Input() videoId: string;
   // Injections
@@ -128,11 +125,10 @@ export class AnnotationInput {
 
         const newAnnotation: Annotation = {
           id: annotationId,
-          className: this.className,
           dynamicContent: newContent,
           headline: sharedForm.headline,
           timestamp: timestampInSeconds,
-          videoId: this.videoId, // TODO - hardcoding this for now (hardcoded video id)
+          videoId: this.videoId,
         };
 
         // Update local storage
