@@ -25,7 +25,7 @@ enum InteractionType {
 // TODO - rename this to annotation-input
 
 @Component({
-  selector: 'app-interactive-card',
+  selector: 'app-annotation-input',
   imports: [
     ButtonModule,
     CardModule,
@@ -37,10 +37,10 @@ enum InteractionType {
     SelectModule,
   ],
   providers: [DatePipe],
-  templateUrl: './interactive-card.html',
-  styleUrl: './interactive-card.scss',
+  templateUrl: './annotation-input.html',
+  styleUrl: './annotation-input.scss',
 })
-export class InteractiveCard {
+export class AnnotationInput {
   // Inputs
   @Input() className: string;
   @Input() timestamp: number;
@@ -54,7 +54,7 @@ export class InteractiveCard {
   // Variables
   classOptions = ['Algebra 1', 'Algebra 2', 'Calculus 1', 'Korean 1'];
   interactionType: InteractionType = InteractionType.multiChoice;
-  interactiveCardForm!: FormGroup;
+  annotationInputForm!: FormGroup;
   formTypes = ['Multiple Choice', 'Long Form', 'Note']; // TODO - make constants for these or can i use the enum? not sure since it's a string
 
   ngOnInit() {
@@ -62,7 +62,7 @@ export class InteractiveCard {
     // https://stackoverflow.com/questions/52321653/angular-datepipe-convert-seconds-to-time-with-zero-timezone-12-instead-of-00
     const convertedTimestamp = this.datePipe.transform(this.timestamp * 1000, 'H:mm:ss', 'UTC');
     console.log('converted timestamp', convertedTimestamp);
-    this.interactiveCardForm = this.formBuilder.group({
+    this.annotationInputForm = this.formBuilder.group({
       sharedForm: this.formBuilder.group({
         // email: ['', [Validators.required, Validators.email]],
         // phone: ['', Validators.required],
@@ -89,14 +89,14 @@ export class InteractiveCard {
     // // });
 
     // enable or disable certain parts of the form as needed
-    // const multiChoiceGroup = this.interactiveCardForm.get('multiChoiceForm') as FormGroup;
+    // const multiChoiceGroup = this.annotationInputForm.get('multiChoiceForm') as FormGroup;
     // multiChoiceGroup.disable();
     // multiChoiceGropu.enable();
   }
 
   submit() {
     // TODO - this is for multiple choice only, need to add an if or switch
-    console.log('onSubmit', this.interactiveCardForm.get('multiChoiceForm')?.value);
+    console.log('onSubmit', this.annotationInputForm.get('multiChoiceForm')?.value);
     // this.myform.reset()
 
     this.communicationService // should i make this it's own function??
@@ -106,13 +106,13 @@ export class InteractiveCard {
         // TODO: any type
 
         // If EDIT - would check if this annotation object already exists
-        const sharedForm = this.interactiveCardForm.get('sharedForm')?.value;
+        const sharedForm = this.annotationInputForm.get('sharedForm')?.value;
         var randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
         const annotationId = randomLetter + Date.now();
 
         // This works specifically for a multiple choice form
         // In future would conditionally create contentForm and newContent based on form type
-        const contentForm = this.interactiveCardForm.get('multiChoiceForm')?.value;
+        const contentForm = this.annotationInputForm.get('multiChoiceForm')?.value;
         const newContent = {
           options: [
             contentForm.optionA,

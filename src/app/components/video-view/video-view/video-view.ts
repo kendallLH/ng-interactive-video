@@ -4,7 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { SelectButtonModule } from 'primeng/selectbutton';
 
 import { AnnotationList } from '../annotation-list/annotation-list';
-import { InteractiveCard } from '../interactive-card/interactive-card';
+import { AnnotationInput } from '../annotation-input/annotation-input';
 import { VideoPlayer } from '../video-player/video-player';
 import { CommunicationService } from '../../../services/communication/communication-service';
 import { Utilities } from '../../../services/utilities/utilities';
@@ -16,7 +16,7 @@ import { take } from 'rxjs/operators';
     AnnotationList,
     ButtonModule,
     FormsModule,
-    InteractiveCard,
+    AnnotationInput,
     SelectButtonModule,
     VideoPlayer,
   ],

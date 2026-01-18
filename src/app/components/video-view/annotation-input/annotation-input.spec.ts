@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InteractiveCard } from './interactive-card';
+import { AnnotationInput } from './annotation-input';
 
-describe('InteractiveCard', () => {
-  let component: InteractiveCard;
-  let fixture: ComponentFixture<InteractiveCard>;
+describe('AnnotationInput', () => {
+  let component: AnnotationInput;
+  let fixture: ComponentFixture<AnnotationInput>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InteractiveCard]
-    })
-    .compileComponents();
+      imports: [AnnotationInput],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(InteractiveCard);
+    fixture = TestBed.createComponent(AnnotationInput);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

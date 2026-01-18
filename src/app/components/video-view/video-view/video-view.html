@@ -6,12 +6,12 @@
   <!-- Right Side Content -->
   <div class="right-content">
     @if (isAddAnnotation()) {
-      <app-interactive-card
-        class="interactive-card-positioning"
+      <app-annotation-input
+        class="annotation-input-positioning"
         [className]="className"
         [timestamp]="timestamp"
         [videoId]="videoId"
-      ></app-interactive-card>
+      ></app-annotation-input>
     } @else {
       <div>
         <p-selectbutton

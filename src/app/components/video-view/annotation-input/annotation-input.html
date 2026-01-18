@@ -1,5 +1,5 @@
-<p-card class="interactive-card">
-  <form [formGroup]="interactiveCardForm">
+<p-card class="annotation-input">
+  <form [formGroup]="annotationInputForm">
     <div formGroupName="sharedForm">
       <div class="time-type-container">
         <p-select
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <!-- @switch (interactiveCardForm.get('formTypeSelect')?.value) -->
+    <!-- @switch (annotationInputForm.get('formTypeSelect')?.value) -->
     <!-- @switch (signalCommon.formType) {
       @case ('text') {
         <input type="text" id="dynamicField" formControlName="dynamicField" />
@@ -74,7 +74,7 @@
 
     <div>Click A, B, C, or D to select the correct answer</div>
 
-    <div class="interactive-card-buttons" formGroupName="sharedForm">
+    <div class="annotation-input-buttons" formGroupName="sharedForm">
       <p-button label="Submit" severity="primary" (click)="submit()"></p-button>
       <p-button label="Cancel" severity="secondary" (click)="cancel()"></p-button>
     </div>
