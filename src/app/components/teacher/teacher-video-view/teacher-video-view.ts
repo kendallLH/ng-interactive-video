@@ -20,10 +20,10 @@ import { take } from 'rxjs/operators';
     SelectButtonModule,
     VideoPlayer,
   ],
-  templateUrl: './video-view.html',
-  styleUrl: './video-view.scss',
+  templateUrl: './teacher-video-view.html',
+  styleUrl: './teacher-video-view.scss',
 })
-export class VideoView {
+export class TeacherVideoView {
   // TODO - service naming is inconsistent!!
   private communicationService = inject(CommunicationService);
   private utilities = inject(Utilities);
