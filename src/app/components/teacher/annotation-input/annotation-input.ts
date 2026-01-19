@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject, Input, ViewChild } from '@angular/core';
+import { Component, inject, Input, ViewChild, WritableSignal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -11,7 +11,7 @@ import { Popover, PopoverModule } from 'primeng/popover';
 import { SelectModule } from 'primeng/select';
 import { take } from 'rxjs';
 
-import { Annotation } from '../../../models/annotation';
+import { Annotation, AnnotationType } from '../../../models/annotation';
 import { LocalStorageConstants } from '../../../shared/constants';
 import { CommunicationService } from '../../../services/communication/communication-service';
 import { LocalStorage } from '../../../services/local-storage/local-storage';
@@ -53,24 +53,17 @@ export class AnnotationInput {
   // 'Long Form', 'Note'
   correctAnswer: string = '';
   showPopover: boolean = false;
+  // timestamp: WritableSignal<number>;
 
   ngOnInit() {
     this.setCorrectAnswer('');
-    console.log('original timestamp', this.timestamp);
-    // https://stackoverflow.com/questions/52321653/angular-datepipe-convert-seconds-to-time-with-zero-timezone-12-instead-of-00
-    const convertedTimestamp = this.datePipe.transform(
-      (this.timestamp | 0) * 1000,
-      'H:mm:ss',
-      'UTC',
-    );
-    console.log('converted timestamp', convertedTimestamp);
     this.annotationInputForm = this.formBuilder.group({
       sharedForm: this.formBuilder.group({
         // email: ['', [Validators.required, Validators.email]],
         // phone: ['', Validators.required],
         annotationTypeSelect: [this.annotationTypeOptions[0]], // TODO - use the constant for this
         headline: [''],
-        timestampPicker: [convertedTimestamp],
+        timestampPicker: [0],
       }),
       multiChoiceForm: this.formBuilder.group({
         optionA: [''],
@@ -79,6 +72,10 @@ export class AnnotationInput {
         optionD: [''],
       }),
     });
+
+    // this.annotationPopover.onAfterViewInit(() => {
+
+    // })
 
     // const sharedForm = this.formBuilder.group({
     //   // email: ['', [Validators.required, Validators.email]],
@@ -94,6 +91,16 @@ export class AnnotationInput {
     // const multiChoiceGroup = this.annotationInputForm.get('multiChoiceForm') as FormGroup;
     // multiChoiceGroup.disable();
     // multiChoiceGropu.enable();
+  }
+
+  setTimestampValue() {
+    // this.timestamp = this.communicationService.getTimestamp();
+    const convertedTimestamp = this.datePipe.transform(
+      (this.timestamp | 0) * 1000,
+      'H:mm:ss',
+      'UTC',
+    );
+    this.annotationInputForm.get('sharedForm')?.patchValue({ timestampPicker: convertedTimestamp });
   }
 
   submit() {
@@ -115,24 +122,21 @@ export class AnnotationInput {
         // This works specifically for a multiple choice form
         // In future would conditionally create contentForm and newContent based on form type
         const contentForm = this.annotationInputForm.get('multiChoiceForm')?.value;
-        const newContent = {
-          options: [
-            contentForm.optionA,
-            contentForm.optionB,
-            contentForm.optionC,
-            contentForm.optionD,
-          ],
-          correctAnswer: this.correctAnswer,
-        };
-
         console.log('timestamp', sharedForm.timestampPicker);
         const timestampInSeconds = this.utilities.getSecondsFromHHMMSS(sharedForm.timestampPicker);
 
         const newAnnotation: Annotation = {
           id: annotationId,
-          dynamicContent: newContent,
+          correctAnswer: this.correctAnswer,
           headline: sharedForm.headline,
+          answerOptions: [
+            contentForm.optionA,
+            contentForm.optionB,
+            contentForm.optionC,
+            contentForm.optionD,
+          ],
           timestamp: timestampInSeconds,
+          type: AnnotationType.MultipleChoice, // hardcoded for now but can be modified in future
           videoId: this.videoId,
         };
 
@@ -151,6 +155,7 @@ export class AnnotationInput {
     this.communicationService.setShowInteractiveCard(false); // tODO - don't need this anymore
     this.setCorrectAnswer('');
     // this.showPopover = true;
+    this.annotationInputForm.reset();
     this.annotationPopover.hide();
   }
 

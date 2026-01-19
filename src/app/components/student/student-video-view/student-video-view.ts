@@ -31,6 +31,8 @@ export class StudentVideoView implements OnInit {
   private utilities = inject(Utilities);
 
   annotations: Annotation[];
+  annotationToDisplay: Annotation;
+  showAnnotation: boolean = false;
   trackTimestamp: number[] = [];
   userResponses: UserResponse[] = [];
   videoId: string;
@@ -70,8 +72,8 @@ export class StudentVideoView implements OnInit {
             annotation.timestamp === currentTime &&
             this.trackTimestamp.indexOf(annotation.timestamp) === -1 // can i use user response here instead?
           ) {
-            // player.pause(); // Pause the video
-            // player.controls(false);
+            player.pause(); // Pause the video
+            player.controls(false);
             this.showAnnotationOverlay(annotation);
             const userResponse = {
               id: '1', // hardcoded for now
@@ -89,6 +91,8 @@ export class StudentVideoView implements OnInit {
 
   showAnnotationOverlay(annotation: Annotation) {
     // TODO - the overlay is going over the whole screen anyway so maybe i don't have to append child to app-player
+    // can just add annotation overlay as a component here
+    // or there was like a way to pass it in or something from primeng? not sure
 
     console.log('IN SHOW ANNOTAITON OVERLAY');
     // Create a host element for the popup
@@ -108,8 +112,10 @@ export class StudentVideoView implements OnInit {
     });
     // Registers the component’s view so it participates in change detection cycle.
     this.appRef.attachView(ref.hostView);
+    // host.show();
     // Inserts the provided host element into the DOM (outside the normal Angular view hierarchy).
     // This is what makes the popup visible on screen, typically used for overlays or modals.
+    // document.getElementById('videoPlayer')?.appendChild(host);
     document.body.appendChild(host);
   }
 }

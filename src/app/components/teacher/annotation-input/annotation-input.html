@@ -1,4 +1,4 @@
-<p-popover #popover>
+<p-popover #popover (onShow)="setTimestampValue()">
   <ng-template #content>
     <form [formGroup]="annotationInputForm" class="input-form-container">
       <h2>New Annotation</h2>

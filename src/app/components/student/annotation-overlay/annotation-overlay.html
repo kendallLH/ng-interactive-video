@@ -1,17 +1,18 @@
-<h1>annotation-overlay works!</h1>
-<p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
-  <span class="p-text-secondary block mb-8">Update your information.</span>
-  <div class="flex items-center gap-4 mb-4">
-    <label for="username" class="font-semibold w-24">{{ annotation.headline }}</label>
-    <input pInputText id="username" class="flex-auto" autocomplete="off" />
+<p-dialog [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }" [closable]="false">
+  <!-- update "body" to be the video player component using a directive -->
+  <!--https://levelup.gitconnected.com/how-to-pass-an-element-reference-down-through-a-component-tree-in-angular-86b495a2ce57-->
+  <div class="annotation-headline">{{ annotation.headline }}</div>
+  <div class="multi-choice-options">
+    @for (option of annotation.answerOptions; track option) {
+      <div class="answer-option">
+        <div class="answer-letter">{{ letters[$index] }}:</div>
+        <div class="answer-text">{{ option }}</div>
+      </div>
+    }
   </div>
-  <div class="flex items-center gap-4 mb-8">
-    <label for="email" class="font-semibold w-24">Email</label>
-    <input pInputText id="email" class="flex-auto" autocomplete="off" />
-  </div>
-  <div class="flex justify-end gap-2">
-    <p-button label="Cancel" severity="secondary" (click)="visible = false" />
-    <p-button label="Save" (click)="visible = false" />
+
+  <div class="overlay-button-container">
+    <p-button label="Submit" [style]="{ width: '100%' }" (click)="visible = false" />
   </div>
 </p-dialog>
 

@@ -1,0 +1,27 @@
+.annotation-headline {
+  padding-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.answer-option {
+  line-height: 2.5;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  display: flex;
+}
+
+.answer-letter {
+  width: 18%;
+  text-align: center;
+  font-weight: bold;
+  color: var(--p-primary-color);
+}
+
+.overlay-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  width: 100%;
+}

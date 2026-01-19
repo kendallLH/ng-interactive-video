@@ -32,6 +32,7 @@ export class TeacherVideoView {
   }
 
   addAnnotation() {
+    console.log('ADD ANNOTATINO');
     // Open the card for the user to input values
     this.communicationService.setShowInteractiveCard(true);
     // Pause the video player

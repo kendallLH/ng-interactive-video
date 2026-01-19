@@ -13,6 +13,7 @@ import { Annotation } from '../../../models/annotation';
 export class AnnotationOverlay {
   @Input() annotation: Annotation;
   @Output() close: boolean = false;
+  letters = ['A', 'B', 'C', 'D'];
   visible = true;
 
   // or on answer

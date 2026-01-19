@@ -17,7 +17,8 @@
   aspect-ratio: 16/9;
 }
 
-.p-popover .p-popover-content {
+.p-popover .p-popover-content,
+.p-dialog {
   font-family:
     'Inter',
     -apple-system,
@@ -30,4 +31,16 @@
     'Apple Color Emoji',
     'Segoe UI Emoji',
     'Segoe UI Symbol';
+}
+
+.p-dialog-header {
+  margin: auto;
+}
+
+// Used in annotation-input
+// Used in annotation-overlay
+.multi-choice-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
 }
