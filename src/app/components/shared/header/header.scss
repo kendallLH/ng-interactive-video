@@ -1,0 +1,54 @@
+/* Main Containers */
+.header {
+  padding: 0.5rem 2rem 0rem 2rem; /* had to do it this way b/c of build in <body> margin */
+
+  // position: sticky; b/c I'm allowing scroll for the note input box
+  top: 0;
+  overflow: hidden;
+  // font-weight: 600;
+}
+
+/* Positioning */
+.header-content {
+  margin: auto; /* this combined with setting a max width will keep the header content in the center of the page */
+  display: flex; /* allows for flexbox to be used on direct child elements of header-content class*/
+  justify-content: space-between; /* adds space between to evenly distribute all children across the given space; in this case it keeps left content to the left and right content to the right */
+}
+
+.left-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 8em;
+}
+
+.right-content {
+  width: 8em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Text */
+
+.header-item {
+  text-decoration: none;
+  color: black;
+}
+
+.header-item:hover {
+  cursor: pointer;
+  //   font-weight: bold;
+  color: #c8bdb3;
+}
+
+/* Images */
+.logo-header {
+  //   height: 3rem;
+  width: 19rem;
+}
+
+.account-logo {
+  font-size: 1.5rem;
+  color: black;
+}

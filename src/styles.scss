@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: calc(100vh - 63px); // view height minus the height of the header + padding
 }
 
 .video-player-container {
