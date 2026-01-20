@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CardModule } from 'primeng/card';
+import { User } from '../../../services/user/user';
 
 @Component({
   selector: 'app-login',
@@ -8,4 +9,10 @@ import { CardModule } from 'primeng/card';
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
-export class Login {}
+export class Login {
+  private userService = inject(User);
+
+  setUser(userId: string) {
+    this.userService.setCurrentUser(userId);
+  }
+}

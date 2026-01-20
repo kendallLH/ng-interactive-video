@@ -1,12 +1,12 @@
 <div class="login-container">
-  <a routerLink="/teacher-dashboard" style="text-decoration: none">
+  <a routerLink="/teacher-dashboard" style="text-decoration: none" (click)="setUser('abc123')">
     <p-card class="login-card">
       <i class="pi pi-user-edit"></i>
       <h2 style="text-decoration: none">Teacher</h2>
     </p-card>
   </a>
 
-  <a routerLink="/student-dashboard" style="text-decoration: none">
+  <a routerLink="/student-dashboard" style="text-decoration: none" (click)="setUser('efg456')">
     <p-card class="login-card">
       <i class="pi pi-book"></i>
       <h2>Student</h2></p-card
