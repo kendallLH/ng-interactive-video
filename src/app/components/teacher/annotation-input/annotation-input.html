@@ -101,8 +101,11 @@
     </form>
   </ng-template>
 </p-popover>
-<p-button
+<button
+  pButton
+  type="button"
   (click)="popover.toggle($event)"
   icon="pi pi-pen-to-square"
   label="Add Annotation"
-></p-button>
+  severity="contrast"
+></button>

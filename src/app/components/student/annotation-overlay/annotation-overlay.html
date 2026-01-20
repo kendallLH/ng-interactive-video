@@ -12,7 +12,14 @@
   </div>
 
   <div class="overlay-button-container">
-    <p-button label="Submit" [style]="{ width: '100%' }" (click)="visible = false" />
+    <button
+      pButton
+      type="button"
+      label="Submit"
+      style="width: 100%"
+      (click)="visible = false"
+      severity="contrast"
+    ></button>
   </div>
 </p-dialog>
 

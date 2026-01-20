@@ -1,3 +1,14 @@
+// .video-view-container {
+//   // display: grid;
+//   // grid-template-columns: auto 1fr;
+//   // display: table;
+// }
+
+.left-right-column-container {
+  display: flex;
+  align-items: stretch;
+}
+
 .timestamp-display {
   margin-right: 0.75rem;
   display: inline-block;
@@ -10,15 +21,16 @@
 }
 
 .right-content {
-  height: 80%;
+  // height: 80%;
   width: 30%; // 100% of the container width which is 30% of the page. need this width so that the nowrap and overflow hidden on the note text works cause it needs a width and this one was missin
   padding: 0rem 1rem;
 }
 
 .annotation-list-container {
   //   height: 60%;
-  height: calc(100vh - 30px); // vh minus the height of the bar on top
-  display: flex;
+  height: calc(
+    100vh - 63px
+  ); // vh minus the height of the bar on top minus the height of the header
 }
 
 .annotation-popover-container {

@@ -10,10 +10,10 @@
       <div class="annotation-text-content">
         <!-- need to set a height on this so text stays to single line. also overflow-->
         <div>
-          <div>
+          <div class="timestamp-display">
             {{ annotation.timestamp * 1000 | date: 'H:mm:ss' : 'UTC' }}
           </div>
-          <h4 class="m-0">{{ annotation.headline }}</h4>
+          <h4 class="m-0" [title]="annotation.headline">{{ annotation.headline }}</h4>
         </div>
 
         <div class="trash-icon-container" (click)="deleteAnnotation(annotation.id)">

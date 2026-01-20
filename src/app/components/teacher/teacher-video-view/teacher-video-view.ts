@@ -26,15 +26,11 @@ export class TeacherVideoView {
   videoId: string;
 
   ngOnInit() {
-    // Connect to the signal that tells us if add annotation box should be open or closed
-    this.isAddAnnotation = this.communicationService.getShowInteractiveCard();
     this.videoId = this.utilities.getVideoIdFromBrowserUrl();
   }
 
   addAnnotation() {
     console.log('ADD ANNOTATINO');
-    // Open the card for the user to input values
-    this.communicationService.setShowInteractiveCard(true);
     // Pause the video player
     this.communicationService
       .getVideoPlayer$()
@@ -43,6 +39,9 @@ export class TeacherVideoView {
         // TODO: any type
         player.pause();
         this.timestamp = player.currentTime();
+        // player.title;
+
+        // console.log('TITLE', player.titleBar.state.title, player.el().title);
 
         // show form overlayed over video
         // for now use css positioning, but maybe upgrade to videojs plugin

@@ -94,7 +94,6 @@ export class AnnotationInput {
   }
 
   setTimestampValue() {
-    // this.timestamp = this.communicationService.getTimestamp();
     const convertedTimestamp = this.datePipe.transform(
       (this.timestamp | 0) * 1000,
       'H:mm:ss',
@@ -146,24 +145,21 @@ export class AnnotationInput {
           this.localStorage.addListItem(LocalStorageConstants.ANNOTATIONS, newAnnotation),
         );
 
-        // this.annotationPopover.toggle();
         player.play();
       });
 
     // TODO clear the card? / reset form this.myform.reset()
     // Close the card
-    this.communicationService.setShowInteractiveCard(false); // tODO - don't need this anymore
     this.setCorrectAnswer('');
-    // this.showPopover = true;
     this.annotationInputForm.reset();
     this.annotationPopover.hide();
   }
 
   cancel() {
-    this.communicationService.setShowInteractiveCard(false);
     // this.myform.reset()
     // this.showPopover = false;
     this.setCorrectAnswer('');
+    this.annotationInputForm.reset();
     this.annotationPopover.hide();
   }
 

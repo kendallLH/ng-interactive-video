@@ -16,7 +16,7 @@ export class CommunicationService {
   private videoPlayer$: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
   // Signals
-  private showInteractiveCard = signal(false);
+  // private showInteractiveCard = signal(false);
 
   /** Observables */
 
@@ -50,11 +50,11 @@ export class CommunicationService {
 
   /** Signals */
 
-  setShowInteractiveCard(shouldShow: boolean) {
-    this.showInteractiveCard.set(shouldShow);
-  }
+  // setShowInteractiveCard(shouldShow: boolean) {
+  //   this.showInteractiveCard.set(shouldShow);
+  // }
 
-  getShowInteractiveCard(): WritableSignal<boolean> {
-    return this.showInteractiveCard;
-  }
+  // getShowInteractiveCard(): WritableSignal<boolean> {
+  //   return this.showInteractiveCard;
+  // }
 }
