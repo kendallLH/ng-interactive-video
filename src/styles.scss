@@ -44,3 +44,11 @@
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
 }
+
+// Used in annotation-input
+// Used in annotation-overlay
+.active {
+  color: var(--p-primary-color);
+  background-color: rgba(188, 245, 192, 0.143);
+  border: 1px solid var(--p-primary-color);
+}

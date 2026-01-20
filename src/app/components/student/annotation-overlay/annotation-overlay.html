@@ -4,7 +4,11 @@
   <div class="annotation-headline">{{ annotation.headline }}</div>
   <div class="multi-choice-options">
     @for (option of annotation.answerOptions; track option) {
-      <div class="answer-option">
+      <div
+        class="answer-option"
+        [class.active]="selectedAnswer === option"
+        (click)="setSelectedAnswer(option)"
+      >
         <div class="answer-letter">{{ letters[$index] }}:</div>
         <div class="answer-text">{{ option }}</div>
       </div>
@@ -17,8 +21,9 @@
       type="button"
       label="Submit"
       style="width: 100%"
-      (click)="visible = false"
+      (click)="onSubmit()"
       severity="contrast"
+      [disabled]="selectedAnswer === ''"
     ></button>
   </div>
 </p-dialog>

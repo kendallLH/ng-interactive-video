@@ -14,9 +14,12 @@
 
 .answer-letter {
   width: 18%;
-  text-align: center;
   font-weight: bold;
+  font-size: 0.85rem;
   color: var(--p-primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .overlay-button-container {

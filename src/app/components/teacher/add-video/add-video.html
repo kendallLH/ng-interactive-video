@@ -1,27 +1,21 @@
 <div class="add-video-container">
-  <div class="input-box-container">
-    <p-select
-      class="class-select"
-      [options]="classOptions"
-      placeholder="Class Name"
-      [(ngModel)]="selectedClass"
-    />
-    <input
-      class="url-input"
-      type="text"
-      pInputText
-      [(ngModel)]="inputUrl"
-      placeholder="YouTube URL"
-      variant="filled"
-    />
-  </div>
+  <!-- <div class="input-box-container"> -->
+  <input class="url-input" pInputText [(ngModel)]="inputUrl" placeholder="YouTube URL" />
+  <p-select
+    class="class-select"
+    [options]="classOptions"
+    placeholder="Class Name"
+    [(ngModel)]="selectedCourse"
+  />
+
+  <!-- </div> -->
 
   <div class="button-container" (click)="onSubmit()">
     <p-button
       class="submit-button"
       label="Submit"
-      severity="primary"
-      [disabled]="selectedClass === '' && inputUrl === ''"
+      severity="contrast"
+      [disabled]="selectedCourse === '' || inputUrl === ''"
     ></p-button>
   </div>
 </div>

@@ -9,9 +9,7 @@ import {
 } from '@angular/core';
 import videojs from 'video.js';
 import 'videojs-youtube';
-
 // import Player from 'video.js/dist/types/player';
-// import '@filmgardi/videojs-markers';
 
 import { CommunicationService } from '../../../services/communication/communication-service';
 
@@ -32,7 +30,6 @@ export class VideoPlayer implements AfterViewInit, OnDestroy {
 
   // Instantiate a Video.js player OnInit
   ngAfterViewInit() {
-    // for youtube
     const options = {
       fluid: true,
       aspectRatio: '16:9',
@@ -60,8 +57,9 @@ export class VideoPlayer implements AfterViewInit, OnDestroy {
       //   }
       // });
     });
-    this.communicationService.setVideoPlayer(this.player);
     this.setTimestampMarker();
+
+    this.communicationService.setVideoPlayer(this.player);
   }
 
   // Dispose the player OnDestroy
@@ -72,13 +70,28 @@ export class VideoPlayer implements AfterViewInit, OnDestroy {
   }
 
   setTimestampMarker() {
-    this.player.markers({
-      markers: [
-        { time: 10, text: 'Chapter 1 Start', classname: 'my-icon-class' },
-        { time: 35.5, text: 'Key Moment', classname: 'my-icon-class' },
-        { time: 60, text: 'End of Segment', classname: 'my-icon-class' },
-      ],
-    });
+    // this.player.markers({
+    //   markers: [
+    //     { time: 10, text: 'Chapter 1 Start', classname: 'my-icon-class' },
+    //     { time: 35.5, text: 'Key Moment', classname: 'my-icon-class' },
+    //     { time: 60, text: 'End of Segment', classname: 'my-icon-class' },
+    //   ],
+    // });
+
+    console.log('IN SET TIMESTMAP MARKERS');
+    // (this.player as any).markers({
+    //   markers: [
+    //     { time: 10, text: 'Chapter 1' },
+    //     { time: 30, text: 'Chapter 2' },
+    //     { time: 50, text: 'Chapter 3', overlayText: 'Start of section' },
+    //   ],
+    //   markerTip: {
+    //     display: true,
+    //     text: (marker: any) => {
+    //       return marker.text;
+    //     },
+    //   },
+    // });
     // Example 1
     // var duration = this.player.duration(); // Get video duration
     // var markers = [
@@ -104,10 +117,5 @@ export class VideoPlayer implements AfterViewInit, OnDestroy {
     //     markerContainer?.appendChild(markerElement);
     //   }
     // });
-  }
-
-  testButton() {
-    this.player.pause();
-    console.log('current time', this.player.currentTime());
   }
 }

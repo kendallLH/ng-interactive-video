@@ -50,6 +50,17 @@
   color: red;
 }
 
+.no-annotations-container {
+  font-size: 1.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2rem;
+  opacity: 80%;
+  height: 25rem;
+}
+
 .annotation-text-content {
   display: flex;
   // flex-direction: row;
@@ -62,6 +73,11 @@
   text-overflow: ellipsis; /* Displays an ellipsis (...) for clipped text */
   min-width: 0;
   justify-content: space-between;
+}
+
+.no-annotations-icon {
+  font-size: 3rem;
+  padding-bottom: 0.5rem;
 }
 
 .annotation-list {

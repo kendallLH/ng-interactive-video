@@ -12,12 +12,15 @@ import { Annotation } from '../../../models/annotation';
 })
 export class AnnotationOverlay {
   @Input() annotation: Annotation;
-  @Output() close: boolean = false;
   letters = ['A', 'B', 'C', 'D'];
+  selectedAnswer: string = '';
   visible = true;
 
-  // or on answer
-  onClose() {
-    this.close = true;
+  onSubmit() {
+    this.visible = false;
+  }
+
+  setSelectedAnswer(selected: string) {
+    this.selectedAnswer = selected;
   }
 }
