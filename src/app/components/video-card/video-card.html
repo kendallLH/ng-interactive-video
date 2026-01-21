@@ -10,3 +10,8 @@
     <div class="class-name-text">{{ video.course?.name }}</div>
   </div>
 </p-card>
+@if (userType === userTypeEnum.Teacher) {
+  <div class="trash-icon-container" (click)="removeVideo(video.id)">
+    <i class="pi pi-trash"></i>
+  </div>
+}

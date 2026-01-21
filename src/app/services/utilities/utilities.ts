@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserType } from '../../shared/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,11 @@ export class Utilities {
   getSecondsFromHHMMSS(timeString: string): number {
     const [hours, minutes, seconds] = timeString.split(':').map(Number);
     return hours * 3600 + minutes * 60 + seconds;
+  }
+
+  getUserTypeFromUrlPath(): string {
+    const urlPath = window.location.pathname;
+    return urlPath.indexOf(UserType.Student) !== -1 ? UserType.Student : UserType.Teacher;
   }
 
   getVideoIdFromYouTubeUrl(url: string): string {

@@ -1,11 +1,12 @@
-import { Component, inject, Input } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { Route, Router, RouterLink } from '@angular/router';
 import { CardModule } from 'primeng/card';
 
 import { Video } from '../../models/video';
+import { LocalStorageConstants, RouteConstants, UserType } from '../../shared/constants';
 import { CommunicationService } from '../../services/communication/communication-service';
 import { LocalStorage } from '../../services/local-storage/local-storage';
-import { LocalStorageConstants, RouteConstants } from '../../shared/constants';
+import { Utilities } from '../../services/utilities/utilities';
 
 @Component({
   selector: 'app-video-card',
@@ -13,20 +14,23 @@ import { LocalStorageConstants, RouteConstants } from '../../shared/constants';
   templateUrl: './video-card.html',
   styleUrl: './video-card.scss',
 })
-export class VideoCard {
-  @Input() video: Video; // TODO: define proper type
+export class VideoCard implements OnInit {
+  @Input() video: Video;
   private communication = inject(CommunicationService); // TODO: for testing only, delete later
   private localStorage = inject(LocalStorage);
   private router = inject(Router);
+  private utilites = inject(Utilities);
+  userType: string;
+  userTypeEnum = UserType;
 
-  constructor() {}
+  ngOnInit() {
+    this.userType = this.utilites.getUserTypeFromUrlPath();
+  }
+
+  // TODO - userType and route constants student / teacher are duplicates of each other
 
   viewVideo() {
-    console.log('view video');
-    // if Student (right now there is no distinction for this view so this will always be a student)
-    this.router.navigate([`/${RouteConstants.VIDEO_VIEW}`, RouteConstants.STUDENT, this.video.id]);
-
-    // if teacher
+    this.router.navigate([`/${RouteConstants.VIDEO_VIEW}`, this.userType, this.video.id]);
   }
 
   removeVideo(videoId: string) {

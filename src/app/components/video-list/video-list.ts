@@ -38,10 +38,5 @@ export class VideoList implements OnInit {
     if (storedVideos && storedVideos.length > 0) {
       this.communication.setVideos(storedVideos);
     }
-
-    // TODO REMOVE THIS - for testing only
-    this.communication.getVideos$().subscribe((videos) => {
-      console.log('video list observable updated videos:', videos);
-    });
   }
 }

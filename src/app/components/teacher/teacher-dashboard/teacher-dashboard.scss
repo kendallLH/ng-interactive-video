@@ -1,8 +1,19 @@
 .teacher-dashboard-container {
-  height: calc(100vh - 63px); // view height minus the height of the header + padding
+  // height: calc(100vh - 63px); // view height minus the height of the header + padding
   width: 100vw;
 
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.teacher-video-list-container {
+  width: 90%;
+  // margin-top: 2rem;
+}
+
+.add-video-container {
+  padding-top: 2rem;
 }

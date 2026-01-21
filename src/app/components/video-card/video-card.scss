@@ -78,15 +78,14 @@
   width: 2rem;
   height: 2rem;
   position: relative;
-  margin-top: 0.5rem;
+  margin-top: -2rem;
   margin-left: 14.5rem;
 
   position: absolute;
   // margin-top: 0.8rem;
   // margin-left: -2rem;
 
-  background-color: black;
-  color: white;
+  color: black;
   border-radius: 50px;
 
   // center the trash icon within the container
@@ -96,6 +95,7 @@
 }
 
 .trash-icon-container:hover {
-  background-color: white;
-  color: black; // changes the color of the trash icon
+  // background-color: white;
+  // color: black; // changes the color of the trash icon
+  color: red;
 }

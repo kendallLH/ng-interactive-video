@@ -10,7 +10,6 @@ import { Annotation } from '../../models/annotation';
 export class CommunicationService {
   // Observables
   private annotations$: BehaviorSubject<Annotation[]> = new BehaviorSubject<Annotation[]>([]);
-  private userType$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   // TODO> any type
   private videoPlayer$: BehaviorSubject<any> = new BehaviorSubject<any>({});
   private videos$: BehaviorSubject<Video[]> = new BehaviorSubject<Video[]>([]); // TODO: make a videlist type
@@ -23,14 +22,6 @@ export class CommunicationService {
 
   getAnnotations$(): Observable<Annotation[]> {
     return this.annotations$.asObservable();
-  }
-
-  setUserType(userType: string) {
-    this.userType$.next(userType);
-  }
-
-  getUserType$(): Observable<string> {
-    return this.userType$.asObservable();
   }
 
   setVideoPlayer(player: any) {
