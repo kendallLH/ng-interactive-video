@@ -1,7 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CardModule } from 'primeng/card';
-import { User } from '../../../services/user/user';
+
+import { UserType } from '../../../shared/constants';
+import { CommunicationService } from '../../../services/communication/communication-service';
 
 @Component({
   selector: 'app-login',
@@ -10,9 +12,10 @@ import { User } from '../../../services/user/user';
   styleUrl: './login.scss',
 })
 export class Login {
-  private userService = inject(User);
+  private communicationService = inject(CommunicationService);
+  userTypeEnum = UserType;
 
-  setUser(userId: string) {
-    this.userService.setCurrentUser(userId);
+  setUser(userType: string) {
+    this.communicationService.setUserType(userType);
   }
 }

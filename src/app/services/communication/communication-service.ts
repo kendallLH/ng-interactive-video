@@ -10,13 +10,10 @@ import { Annotation } from '../../models/annotation';
 export class CommunicationService {
   // Observables
   private annotations$: BehaviorSubject<Annotation[]> = new BehaviorSubject<Annotation[]>([]);
-  private videos$: BehaviorSubject<Video[]> = new BehaviorSubject<Video[]>([]); // TODO: make a videlist type
-
+  private userType$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   // TODO> any type
   private videoPlayer$: BehaviorSubject<any> = new BehaviorSubject<any>({});
-
-  // Signals
-  // private showInteractiveCard = signal(false);
+  private videos$: BehaviorSubject<Video[]> = new BehaviorSubject<Video[]>([]); // TODO: make a videlist type
 
   /** Observables */
 
@@ -28,12 +25,12 @@ export class CommunicationService {
     return this.annotations$.asObservable();
   }
 
-  getVideos$(): Observable<Video[]> {
-    return this.videos$.asObservable();
+  setUserType(userType: string) {
+    this.userType$.next(userType);
   }
 
-  setVideos(videos: Video[]) {
-    this.videos$.next(videos);
+  getUserType$(): Observable<string> {
+    return this.userType$.asObservable();
   }
 
   setVideoPlayer(player: any) {
@@ -46,6 +43,14 @@ export class CommunicationService {
     // TODO: any type
     console.log('get video player', this.videoPlayer$);
     return this.videoPlayer$.asObservable();
+  }
+
+  setVideos(videos: Video[]) {
+    this.videos$.next(videos);
+  }
+
+  getVideos$(): Observable<Video[]> {
+    return this.videos$.asObservable();
   }
 
   /** Signals */

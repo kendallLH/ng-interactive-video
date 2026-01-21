@@ -8,3 +8,8 @@ export class LocalStorageConstants {
   public static ANNOTATIONS = 'annotations';
   public static VIDEOS = 'videos-list';
 }
+
+export enum UserType {
+  Student = 'student',
+  Teacher = 'teacher',
+}
