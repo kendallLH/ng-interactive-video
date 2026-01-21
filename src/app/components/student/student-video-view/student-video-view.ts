@@ -103,11 +103,14 @@ export class StudentVideoView implements OnInit {
       hostElement: host,
       bindings: [
         inputBinding('annotation', () => annotation),
-        // outputBinding('closed', () => {
-        //   document.body.removeChild(host);
-        //   this.appRef.detachView(ref.hostView);
-        //   ref.destroy();
-        // }),
+        // overlay doesn't work when this is uncommented
+        outputBinding('closed', () => {
+          //player.play();
+          console.log('CLOSED');
+          document.body.removeChild(host);
+          this.appRef.detachView(ref.hostView);
+          ref.destroy();
+        }),
       ],
     });
     // Registers the component’s view so it participates in change detection cycle.

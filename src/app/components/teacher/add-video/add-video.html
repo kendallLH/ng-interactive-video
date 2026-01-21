@@ -1,5 +1,4 @@
 <div class="add-video-container">
-  <!-- <div class="input-box-container"> -->
   <input class="url-input" pInputText [(ngModel)]="inputUrl" placeholder="YouTube URL" />
   <p-select
     class="class-select"
@@ -7,8 +6,6 @@
     placeholder="Class Name"
     [(ngModel)]="selectedCourse"
   />
-
-  <!-- </div> -->
 
   <div class="button-container" (click)="onSubmit()">
     <p-button

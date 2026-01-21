@@ -1,18 +1,16 @@
 /* Main Containers */
 .header {
   padding: 0.5rem 2rem 0rem 2rem; /* had to do it this way b/c of build in <body> margin */
-
-  // position: sticky; b/c I'm allowing scroll for the note input box
   top: 0;
   overflow: hidden;
-  // font-weight: 600;
 }
 
 /* Positioning */
+
 .header-content {
-  margin: auto; /* this combined with setting a max width will keep the header content in the center of the page */
-  display: flex; /* allows for flexbox to be used on direct child elements of header-content class*/
-  justify-content: space-between; /* adds space between to evenly distribute all children across the given space; in this case it keeps left content to the left and right content to the right */
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .left-content {
@@ -38,13 +36,12 @@
 
 .header-item:hover {
   cursor: pointer;
-  //   font-weight: bold;
   color: #c8bdb3;
 }
 
 /* Images */
+
 .logo-header {
-  //   height: 3rem;
   width: 19rem;
 }
 

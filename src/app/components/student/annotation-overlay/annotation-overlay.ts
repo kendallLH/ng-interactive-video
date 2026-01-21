@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 
@@ -12,12 +12,14 @@ import { Annotation } from '../../../models/annotation';
 })
 export class AnnotationOverlay {
   @Input() annotation: Annotation;
+  @Output() closed = new EventEmitter<boolean>();
   letters = ['A', 'B', 'C', 'D'];
   selectedAnswer: string = '';
   visible = true;
 
   onSubmit() {
     this.visible = false;
+    this.closed.emit(true);
   }
 
   setSelectedAnswer(selected: string) {

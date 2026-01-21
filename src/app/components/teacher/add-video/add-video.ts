@@ -25,7 +25,7 @@ export class AddVideo {
   private youtubeDataApi = inject(YoutubeDataApi);
   inputUrl: string = '';
   // put this in a mocks folder or something
-  classOptions = ['Algebra 1', 'Algebra 2', 'Calculus 1', 'Korean 1'];
+  classOptions = ['Algebra 1', 'Algebra 2', 'Calculus 1', 'Calculus 2', 'Korean 1', 'Korean 2'];
   selectedCourse: string = '';
 
   onSubmit() {
