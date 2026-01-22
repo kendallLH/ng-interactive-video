@@ -35,6 +35,13 @@
   border: 1px solid var(--p-primary-color);
 }
 
+// todo this is a duplicate in styles.scss but for somer eason it only works here
+.active {
+  color: var(--p-primary-color);
+  background-color: rgba(188, 245, 192, 0.143);
+  border: 1px solid var(--p-primary-color);
+}
+
 // tODO - is this doing anything?
 .p-button,
 .p-button-primary {

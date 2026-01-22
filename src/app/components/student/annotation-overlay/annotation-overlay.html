@@ -2,7 +2,7 @@
   <!-- update "body" to be the video player component using a directive -->
   <!--https://levelup.gitconnected.com/how-to-pass-an-element-reference-down-through-a-component-tree-in-angular-86b495a2ce57-->
   <div class="annotation-headline">{{ annotation.headline }}</div>
-  <div class="multi-choice-options">
+  <div class="multi-choice-options-container">
     @for (option of annotation.answerOptions; track option) {
       <div
         class="answer-option"

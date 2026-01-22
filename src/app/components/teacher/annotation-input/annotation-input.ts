@@ -1,6 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { Component, inject, Input, ViewChild, WritableSignal } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  RequiredValidator,
+  Validators,
+} from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DatePickerModule } from 'primeng/datepicker';
@@ -46,7 +52,6 @@ export class AnnotationInput {
   private formBuilder = inject(FormBuilder);
   private utilities = inject(Utilities);
   // Variables
-  classOptions = ['Algebra 1', 'Algebra 2', 'Calculus 1', 'Korean 1'];
   annotationInputForm!: FormGroup;
   annotationTypeOptions = ['Multiple Choice']; // TODO - make constants for these or can i use the enum? not sure since it's a string
   // In future will have
@@ -61,15 +66,15 @@ export class AnnotationInput {
       sharedForm: this.formBuilder.group({
         // email: ['', [Validators.required, Validators.email]],
         // phone: ['', Validators.required],
-        annotationTypeSelect: [this.annotationTypeOptions[0]], // TODO - use the constant for this
-        headline: [''],
-        timestampPicker: [0],
+        annotationTypeSelect: [this.annotationTypeOptions[0], { nonNullable: true }], // TODO - use the constant for this
+        headline: ['', Validators.required],
+        timestampPicker: [0, Validators.required],
       }),
       multiChoiceForm: this.formBuilder.group({
-        optionA: [''],
-        optionB: [''],
-        optionC: [''],
-        optionD: [''],
+        optionA: ['', Validators.required],
+        optionB: ['', Validators.required],
+        optionC: ['', Validators.required],
+        optionD: ['', Validators.required],
       }),
     });
 

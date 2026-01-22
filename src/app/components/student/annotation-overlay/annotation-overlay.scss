@@ -10,10 +10,11 @@
   border-radius: 10px;
   border: 1px solid lightgray;
   display: flex;
+  margin-bottom: 0.5rem;
 }
 
 .answer-letter {
-  width: 18%;
+  width: 13%;
   font-weight: bold;
   font-size: 0.85rem;
   color: var(--p-primary-color);
@@ -25,6 +26,6 @@
 .overlay-button-container {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   width: 100%;
 }

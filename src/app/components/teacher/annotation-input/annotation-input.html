@@ -79,7 +79,12 @@
 
       <div class="annotation-input-buttons" formGroupName="sharedForm">
         <p-button label="Cancel" severity="secondary" (click)="cancel()"></p-button>
-        <p-button label="Submit" severity="primary" (click)="submit()"></p-button>
+        <p-button
+          label="Submit"
+          severity="primary"
+          (click)="submit()"
+          [disabled]="!annotationInputForm.valid"
+        ></p-button>
       </div>
     </form>
   </ng-template>
