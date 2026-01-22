@@ -20,7 +20,11 @@ export class Header {
     // In this case, since the user isn't required to go through the authentication flow for every session
     // that observable may not always be populated. So for this use case, using the current url to determine
     // the user type works best
-    const userType = this.utilities.getUserTypeFromUrlPath();
-    this.router.navigate([`/${userType}-dashboard`]);
+
+    // Don't navigate if user hasn't been selected
+    if (window.location.pathname !== '/') {
+      const userType = this.utilities.getUserTypeFromUrlPath();
+      this.router.navigate([`/${userType}-dashboard`]);
+    }
   }
 }

@@ -2,7 +2,7 @@
   <a routerLink="/teacher-dashboard" style="text-decoration: none">
     <p-card class="login-card">
       <i class="pi pi-user-edit"></i>
-      <h2 style="text-decoration: none">Teacher</h2>
+      <h2>Teacher</h2>
     </p-card>
   </a>
 
@@ -12,4 +12,19 @@
       <h2>Student</h2></p-card
     >
   </a>
+</div>
+<div class="button-container">
+  <button
+    pButton
+    class="mock-data-button"
+    type="button"
+    label="Add Mock Data"
+    severity="secondary"
+  ></button>
+  <i class="pi pi-info-circle tooltip-icon" [pTooltip]="tooltipContent"></i>
+  <ng-template #tooltipContent>
+    <div>Pre-populate mock videos and annotations.</div>
+    <br />
+    <div>You can still add and delete videos from the teacher dashboard.</div>
+  </ng-template>
 </div>

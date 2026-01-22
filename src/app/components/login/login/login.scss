@@ -7,12 +7,22 @@
   align-items: center;
 }
 
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -3rem;
+}
+
 .login-card {
   width: 13rem;
   height: 13rem;
   text-decoration: none;
   margin: 2rem;
   border: 1px solid lightgray;
+  display: flex;
+  align-items: center;
 }
 
 .login-card:hover {
@@ -22,6 +32,18 @@
     0 2px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.pi {
+.pi-user-edit,
+.pi-book {
   font-size: 6rem;
+}
+
+.mock-data-button {
+  width: 10rem;
+  background-color: white;
+  border: 1px solid lightgray;
+  margin-right: 0.5rem;
+}
+
+.tooltip-icon {
+  font-size: 1rem;
 }

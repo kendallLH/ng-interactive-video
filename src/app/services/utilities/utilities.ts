@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
-import { UserType } from '../../shared/constants';
+import { inject, Injectable } from '@angular/core';
+import { LocalStorageConstants, UserType } from '../../shared/constants';
+import { LocalStorage } from '../local-storage/local-storage';
+import { mockAnnotations, mockVideos } from '../../shared/mocks';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Utilities {
+  private localStorage = inject(LocalStorage);
+
   getSecondsFromHHMMSS(timeString: string): number {
     const [hours, minutes, seconds] = timeString.split(':').map(Number);
     return hours * 3600 + minutes * 60 + seconds;
@@ -33,5 +37,11 @@ export class Utilities {
     let segments = pathname.split('/');
     segments = segments.filter((segment) => segment.length > 0);
     return segments.pop() || '';
+  }
+
+  prePopulateData() {
+    //localstorage.setitem() {}
+    this.localStorage.setItem(LocalStorageConstants.VIDEOS, mockVideos);
+    this.localStorage.setItem(LocalStorageConstants.ANNOTATIONS, mockAnnotations);
   }
 }

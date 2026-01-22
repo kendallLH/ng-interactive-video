@@ -18,7 +18,8 @@
 }
 
 .p-popover .p-popover-content,
-.p-dialog {
+.p-dialog,
+.p-tooltip-text {
   font-family:
     'Inter',
     -apple-system,
@@ -31,6 +32,11 @@
     'Apple Color Emoji',
     'Segoe UI Emoji',
     'Segoe UI Symbol';
+}
+
+.p-tooltip-text {
+  font-size: 14px;
+  width: 16rem;
 }
 
 .p-dialog-header {
