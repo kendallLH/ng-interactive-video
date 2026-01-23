@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
   justify-content: center;
-  margin-top: 4rem; // TODO: may need to make dynamic for all screen sizes later
+  margin-top: 4rem;
 }
 
 .video-card-container {

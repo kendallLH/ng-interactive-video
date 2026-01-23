@@ -19,8 +19,6 @@ export class TeacherVideoView {
   // TODO - service naming is inconsistent!!
   private communicationService = inject(CommunicationService);
   private utilities = inject(Utilities);
-
-  annotationTypeOptions: any[] = [{ name: 'Multi-Choice', value: 1 }];
   isAddAnnotation: WritableSignal<boolean>;
   timestamp: number;
   videoId: string;
@@ -29,24 +27,18 @@ export class TeacherVideoView {
     this.videoId = this.utilities.getVideoIdFromBrowserUrl();
   }
 
+  /**
+   * The add annotation popover is opened on click of the element.
+   * This function pauses the video player and grabs the current timestamp
+   * to pre-fill in the popover.
+   */
   addAnnotation() {
-    console.log('ADD ANNOTATINO');
-    // Pause the video player
     this.communicationService
       .getVideoPlayer$()
       .pipe(take(1))
       .subscribe((player: any) => {
-        // TODO: any type
         player.pause();
         this.timestamp = player.currentTime();
-        // player.title;
-
-        // console.log('TITLE', player.titleBar.state.title, player.el().title);
-
-        // show form overlayed over video
-        // for now use css positioning, but maybe upgrade to videojs plugin
-        // https://www.npmjs.com/package/videojs-overlay
-        // https://codepen.io/fealaer/pen/RwbKeye
       });
   }
 }

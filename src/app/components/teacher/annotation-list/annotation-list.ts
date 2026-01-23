@@ -24,7 +24,6 @@ export class AnnotationList implements OnInit {
   annotations$: Observable<any>;
 
   ngOnInit() {
-    // TODO - unsubscribe
     this.annotations$ = this.communicationService.getAnnotations$().pipe(
       map((annotations) => {
         if (annotations.length === 0) {
@@ -40,19 +39,14 @@ export class AnnotationList implements OnInit {
         });
         return filteredAnnotations;
       }),
-    ); // don't need unsubscribe cause of async pipe
+    );
   }
 
   deleteAnnotation(annotationId: string) {
-    // const isExistingNote = this.noteActions.getNoteId() !== '';
-
-    // if (isExistingNote) {
-    // delete note
     const updatedAnnotations = this.localStorage.removeListItemById(
       LocalStorageConstants.ANNOTATIONS,
       annotationId,
     );
-
     this.communicationService.setAnnotations(updatedAnnotations);
   }
 }

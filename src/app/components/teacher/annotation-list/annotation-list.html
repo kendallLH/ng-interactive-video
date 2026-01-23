@@ -3,11 +3,13 @@
     @for (annotation of annotations$ | async; track annotation.id) {
       <div class="annotation-card-container">
         <div class="annotation-text-content">
-          <div>
+          <div style="width: 96%">
             <div class="timestamp-display">
               {{ annotation.timestamp * 1000 | date: 'H:mm:ss' : 'UTC' }}
             </div>
-            <h4 class="m-0" [title]="annotation.headline">{{ annotation.headline }}</h4>
+            <h4 class="m-0" [title]="annotation.headline" class="overflow-style">
+              {{ annotation.headline }}
+            </h4>
           </div>
 
           <div class="trash-icon-container" (click)="deleteAnnotation(annotation.id)">

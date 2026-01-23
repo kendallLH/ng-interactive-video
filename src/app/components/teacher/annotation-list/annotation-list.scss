@@ -63,14 +63,8 @@
 
 .annotation-text-content {
   display: flex;
-  // flex-direction: row;
   height: 2.8rem;
-  // width: 100%;
   width: 97%;
-
-  // white-space: nowrap; /* Prevents text from wrapping to the next line */
-  overflow: hidden; /* Hides any text that overflows the element's box */
-  text-overflow: ellipsis; /* Displays an ellipsis (...) for clipped text */
   min-width: 0;
   justify-content: space-between;
 }
@@ -81,13 +75,17 @@
 }
 
 .annotation-list {
-  //   position: absolute;
   overflow-y: scroll;
   flex-grow: 1;
-  //   height: 100%;
-  //   height: calc(100% - 35px); // 100% of container height - height of action items
+  height: calc(100vh - 160px);
 }
 
 .timestamp-display {
   margin-bottom: 0.25rem;
+}
+
+.overflow-style {
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  overflow: hidden; /* Hides any text that overflows the element's box */
+  text-overflow: ellipsis; /* Displays an ellipsis (...) for clipped text */
 }

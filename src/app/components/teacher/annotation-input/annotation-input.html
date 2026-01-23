@@ -78,11 +78,11 @@
       <div class="info-text">Select A, B, C, or D to set the correct answer</div>
 
       <div class="annotation-input-buttons" formGroupName="sharedForm">
-        <p-button label="Cancel" severity="secondary" (click)="cancel()"></p-button>
+        <p-button label="Cancel" severity="secondary" (click)="closeCard()"></p-button>
         <p-button
           label="Submit"
           severity="primary"
-          (click)="submit()"
+          (click)="submitCard()"
           [disabled]="!annotationInputForm.valid"
         ></p-button>
       </div>

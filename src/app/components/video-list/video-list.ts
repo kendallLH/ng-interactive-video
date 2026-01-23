@@ -3,10 +3,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { VideoCard } from '../video-card/video-card';
+import { Video } from '../../models/video';
+import { LocalStorageConstants } from '../../shared/constants';
 import { CommunicationService } from '../../services/communication/communication-service';
 import { LocalStorage } from '../../services/local-storage/local-storage';
-import { LocalStorageConstants } from '../../shared/constants';
-import { Video } from '../../models/video';
 
 @Component({
   selector: 'app-video-list',
@@ -17,7 +17,7 @@ import { Video } from '../../models/video';
 export class VideoList implements OnInit {
   private localStorage = inject(LocalStorage);
   private communication = inject(CommunicationService);
-  videos$: Observable<any[]>; // TODO: define proper type;
+  videos$: Observable<Video[]>;
 
   ngOnInit() {
     this.videos$ = this.communication.getVideos$().pipe(

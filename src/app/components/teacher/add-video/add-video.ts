@@ -1,10 +1,11 @@
+// External Imports
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-
+// Internal Imports
 import { Course } from '../../../models/course';
 import { Status, Video } from '../../../models/video';
 import { LocalStorageConstants, RouteConstants } from '../../../shared/constants';
@@ -44,8 +45,6 @@ export class AddVideo {
         name: this.selectedCourse,
         teacherId: 'teacher-1',
       };
-      // Update local storage with the new item
-      // TODO: prevent duplicates
       const videoDetails: Video = {
         id: videoId,
         course,

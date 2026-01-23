@@ -1,12 +1,6 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject, Input, ViewChild, WritableSignal } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  RequiredValidator,
-  Validators,
-} from '@angular/forms';
+import { Component, inject, Input, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DatePickerModule } from 'primeng/datepicker';
@@ -42,30 +36,23 @@ import { Utilities } from '../../../services/utilities/utilities';
 })
 export class AnnotationInput {
   @ViewChild('popover') annotationPopover: Popover;
-  // Inputs
   @Input() timestamp: number;
   @Input() videoId: string;
-  // Injections
   private communicationService = inject(CommunicationService);
   private datePipe = inject(DatePipe);
   private localStorage = inject(LocalStorage);
   private formBuilder = inject(FormBuilder);
   private utilities = inject(Utilities);
-  // Variables
   annotationInputForm!: FormGroup;
   annotationTypeOptions = ['Multiple Choice']; // TODO - make constants for these or can i use the enum? not sure since it's a string
   // In future will have
   // 'Long Form', 'Note'
   correctAnswer: string = '';
-  showPopover: boolean = false;
-  // timestamp: WritableSignal<number>;
 
   ngOnInit() {
     this.setCorrectAnswer('');
     this.annotationInputForm = this.formBuilder.group({
       sharedForm: this.formBuilder.group({
-        // email: ['', [Validators.required, Validators.email]],
-        // phone: ['', Validators.required],
         annotationTypeSelect: [this.annotationTypeOptions[0], { nonNullable: true }], // TODO - use the constant for this
         headline: ['', Validators.required],
         timestampPicker: [0, Validators.required],
@@ -78,21 +65,7 @@ export class AnnotationInput {
       }),
     });
 
-    // this.annotationPopover.onAfterViewInit(() => {
-
-    // })
-
-    // const sharedForm = this.formBuilder.group({
-    //   // email: ['', [Validators.required, Validators.email]],
-    //   // phone: ['', Validators.required],
-    // });
-    // // Subscribe to changes in the selector to update the dynamic field's properties
-    // // this.form.get('inputTypeSelector')?.valueChanges.subscribe((value) => {
-    // //   // You can add/remove validators or other logic here if needed
-    // //   // For switching the input type, most logic stays in the template
-    // // });
-
-    // enable or disable certain parts of the form as needed
+    // enable or disable certain parts of the form as needed (use for future state of multiple form types)
     // const multiChoiceGroup = this.annotationInputForm.get('multiChoiceForm') as FormGroup;
     // multiChoiceGroup.disable();
     // multiChoiceGropu.enable();
@@ -107,11 +80,7 @@ export class AnnotationInput {
     this.annotationInputForm.get('sharedForm')?.patchValue({ timestampPicker: convertedTimestamp });
   }
 
-  submit() {
-    // TODO - this is for multiple choice only, need to add an if or switch
-    console.log('onSubmit', this.annotationInputForm.get('multiChoiceForm')?.value);
-    // this.myform.reset()
-
+  submitCard() {
     this.communicationService // should i make this it's own function??
       .getVideoPlayer$()
       .pipe(take(1))
@@ -149,20 +118,14 @@ export class AnnotationInput {
         this.communicationService.setAnnotations(
           this.localStorage.addListItem(LocalStorageConstants.ANNOTATIONS, newAnnotation),
         );
-
         player.play();
       });
 
-    // TODO clear the card? / reset form this.myform.reset()
     // Close the card
-    this.setCorrectAnswer('');
-    this.annotationInputForm.reset();
-    this.annotationPopover.hide();
+    this.closeCard();
   }
 
-  cancel() {
-    // this.myform.reset()
-    // this.showPopover = false;
+  closeCard() {
     this.setCorrectAnswer('');
     this.annotationInputForm.reset();
     this.annotationPopover.hide();

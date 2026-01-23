@@ -10,15 +10,15 @@ import {
   AfterViewInit,
   OnDestroy,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { AnnotationOverlay } from '../annotation-overlay/annotation-overlay';
+import { Annotation } from '../../../models/annotation';
 import { VideoPlayer } from '../../shared/video-player/video-player';
-import { Annotation, UserResponse } from '../../../models/annotation';
 import { LocalStorageConstants } from '../../../shared/constants';
 import { CommunicationService } from '../../../services/communication/communication-service';
 import { LocalStorage } from '../../../services/local-storage/local-storage';
 import { Utilities } from '../../../services/utilities/utilities';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-student-video-view',
