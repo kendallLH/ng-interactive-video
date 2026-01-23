@@ -44,7 +44,7 @@ export class AnnotationInput {
   private formBuilder = inject(FormBuilder);
   private utilities = inject(Utilities);
   annotationInputForm!: FormGroup;
-  annotationTypeOptions = ['Multiple Choice']; // TODO - make constants for these or can i use the enum? not sure since it's a string
+  annotationTypeOptions = [AnnotationType.MultipleChoice];
   // In future will have
   // 'Long Form', 'Note'
   correctAnswer: string = '';

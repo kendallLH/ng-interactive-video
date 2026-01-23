@@ -18,7 +18,7 @@
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 .info-text {
@@ -26,6 +26,12 @@
   display: flex;
   justify-content: center;
   margin-top: 0.5rem;
+}
+
+.headline-text {
+  margin: 1rem 0rem;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .multiple-choice:hover {

@@ -57,8 +57,6 @@ export class VideoPlayer implements AfterViewInit, OnDestroy {
       //   }
       // });
     });
-    this.setTimestampMarker();
-
     this.communicationService.setVideoPlayer(this.player);
   }
 
@@ -67,55 +65,5 @@ export class VideoPlayer implements AfterViewInit, OnDestroy {
     if (this.player) {
       this.player.dispose();
     }
-  }
-
-  setTimestampMarker() {
-    // this.player.markers({
-    //   markers: [
-    //     { time: 10, text: 'Chapter 1 Start', classname: 'my-icon-class' },
-    //     { time: 35.5, text: 'Key Moment', classname: 'my-icon-class' },
-    //     { time: 60, text: 'End of Segment', classname: 'my-icon-class' },
-    //   ],
-    // });
-
-    console.log('IN SET TIMESTMAP MARKERS');
-    // (this.player as any).markers({
-    //   markers: [
-    //     { time: 10, text: 'Chapter 1' },
-    //     { time: 30, text: 'Chapter 2' },
-    //     { time: 50, text: 'Chapter 3', overlayText: 'Start of section' },
-    //   ],
-    //   markerTip: {
-    //     display: true,
-    //     text: (marker: any) => {
-    //       return marker.text;
-    //     },
-    //   },
-    // });
-    // Example 1
-    // var duration = this.player.duration(); // Get video duration
-    // var markers = [
-    //   { time: 30, iconClass: 'timestamp-marker', id: 'marker-1' }, // 30 seconds
-    //   { time: 120, iconClass: 'timestamp-marker', id: 'marker-2' }, // 2 minutes
-    // ];
-    // Example 2
-    // var markerContainer = document.querySelector('.timestamp-marker-container');
-    // console.log('marker container', markerContainer);
-    // // Add markers to the container
-    // markers.forEach((marker) => {
-    //   if (duration && marker.time < duration) {
-    //     var markerElement = document.createElement('div');
-    //     markerElement.className = marker.iconClass;
-    //     markerElement.id = marker.id;
-    //     // Calculate left position as a percentage of duration
-    //     var leftPosition = (marker.time / duration) * 100;
-    //     markerElement.style.left = leftPosition + '%';
-    //     // Optional: Add click handler to jump to timestamp
-    //     // markerElement.addEventListener('click', function () {
-    //     //   this.player.currentTime(marker.time);
-    //     // });
-    //     markerContainer?.appendChild(markerElement);
-    //   }
-    // });
   }
 }

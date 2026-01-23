@@ -1,7 +1,7 @@
 <p-popover #popover (onShow)="setTimestampValue()">
   <ng-template #content>
     <form [formGroup]="annotationInputForm" class="input-form-container">
-      <h2>New Annotation</h2>
+      <div class="headline-text">New Annotation</div>
 
       <div formGroupName="sharedForm">
         <div class="time-type-container">
@@ -24,7 +24,7 @@
           <input
             class="headline-input"
             pInputText
-            placeholder="Headline / Question"
+            placeholder="Question"
             formControlName="headline"
           />
         </div>
@@ -78,13 +78,14 @@
       <div class="info-text">Select A, B, C, or D to set the correct answer</div>
 
       <div class="annotation-input-buttons" formGroupName="sharedForm">
-        <p-button label="Cancel" severity="secondary" (click)="closeCard()"></p-button>
-        <p-button
+        <button pButton label="Cancel" severity="secondary" (click)="closeCard()"></button>
+        <button
+          pButton
           label="Submit"
-          severity="primary"
+          severity="contrast"
           (click)="submitCard()"
           [disabled]="!annotationInputForm.valid"
-        ></p-button>
+        ></button>
       </div>
     </form>
   </ng-template>

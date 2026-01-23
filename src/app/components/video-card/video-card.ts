@@ -16,7 +16,7 @@ import { Utilities } from '../../services/utilities/utilities';
 })
 export class VideoCard implements OnInit {
   @Input() video: Video;
-  private communication = inject(CommunicationService); // TODO: for testing only, delete later
+  private communication = inject(CommunicationService);
   private localStorage = inject(LocalStorage);
   private router = inject(Router);
   private utilites = inject(Utilities);

@@ -41,26 +41,24 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
   videoId: string;
 
   ngOnInit() {
-    // TODO - this does not work, it needs to be an observable or video id needs to be set on click of the card
     this.videoId = this.utilities.getVideoIdFromBrowserUrl();
     console.log('VIDEO ID', this.videoId);
     console.log('ANNOTATION');
-
-    // TODO - move this to utilities
-    // console.log('annotations', this.annotations);
-    // this.displayAnnotations();
   }
 
   ngAfterViewInit() {
     this.displayAnnotations();
   }
 
+  /**
+   * Formally unsubscribe to the observable when the component is destroyed.
+   * Unlike subscriptions the subscriptions in other components that use take(1) or AsyncPipe, this one is not automatically completed
+   */
   ngOnDestroy() {
-    // Need to formally unsubscribe:
-    // Unlike subscriptions in other components, this one is not
-    // automatically completed like when using take(1) or AsyncPipe
     this.playerSubscription.unsubscribe();
   }
+
+  // TODO make an annotation sservice?
 
   getAnnotationsByVideoId() {
     const allAnnotations = this.localStorage.getListItems(LocalStorageConstants.ANNOTATIONS);
@@ -83,7 +81,6 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
         if (currentTime === lastTriggeredTime) return;
         lastTriggeredTime = currentTime;
 
-        // i had annotations here before
         console.log('this.annotations before the for loop', annotations);
         annotations.forEach((annotation: Annotation) => {
           // i don't think filtered annotations will work as is
@@ -108,11 +105,6 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
   }
 
   showAnnotationOverlay(annotation: Annotation) {
-    // TODO - the overlay is going over the whole screen anyway so maybe i don't have to append child to app-player
-    // can just add annotation overlay as a component here
-    // or there was like a way to pass it in or something from primeng? not sure
-
-    console.log('show annotation overlay, annotation is', annotation);
     // Create a host element for the popup
     const host = document.createElement('overlay-host');
     // Create the component and bind in one call
@@ -121,8 +113,8 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
       hostElement: host,
       bindings: [
         inputBinding('annotation', () => annotation),
-        // overlay doesn't work when this is uncommented
         outputBinding('closed', () => {
+          // TODO
           //player.play();
           //player.controls(true);
           console.log('CLOSED');
@@ -134,10 +126,6 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
     });
     // Registers the component’s view so it participates in change detection cycle.
     this.appRef.attachView(ref.hostView);
-    // host.show();
-    // Inserts the provided host element into the DOM (outside the normal Angular view hierarchy).
-    // This is what makes the popup visible on screen, typically used for overlays or modals.
-    // document.getElementById('videoPlayer')?.appendChild(host);
     document.body.appendChild(host);
   }
 }

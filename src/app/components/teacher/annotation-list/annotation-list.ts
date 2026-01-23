@@ -1,7 +1,7 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 import { LocalStorage } from '../../../services/local-storage/local-storage';
 import { CommunicationService } from '../../../services/communication/communication-service';
@@ -15,12 +15,9 @@ import { Annotation } from '../../../models/annotation';
   styleUrl: './annotation-list.scss',
 })
 export class AnnotationList implements OnInit {
-  // Inputs
   @Input() videoId: string;
-  // Injections
   private communicationService = inject(CommunicationService);
   private localStorage = inject(LocalStorage);
-  // Variables
   annotations$: Observable<any>;
 
   ngOnInit() {
@@ -42,11 +39,22 @@ export class AnnotationList implements OnInit {
     );
   }
 
-  deleteAnnotation(annotationId: string) {
+  deleteAnnotation(event: Event, annotationId: string) {
+    event.stopPropagation(); // prevent the parent click action from firing
     const updatedAnnotations = this.localStorage.removeListItemById(
       LocalStorageConstants.ANNOTATIONS,
       annotationId,
     );
     this.communicationService.setAnnotations(updatedAnnotations);
+  }
+
+  navigateToTimestamp(timestamp: number) {
+    this.communicationService
+      .getVideoPlayer$()
+      .pipe(take(1))
+      .subscribe((player) => {
+        player.currentTime(timestamp);
+        player.play();
+      });
   }
 }

@@ -1,7 +1,7 @@
 <div class="annotation-list">
   @if ((annotations$ | async).length > 0) {
     @for (annotation of annotations$ | async; track annotation.id) {
-      <div class="annotation-card-container">
+      <div class="annotation-card-container" (click)="navigateToTimestamp(annotation.timestamp)">
         <div class="annotation-text-content">
           <div style="width: 96%">
             <div class="timestamp-display">
@@ -12,7 +12,7 @@
             </h4>
           </div>
 
-          <div class="trash-icon-container" (click)="deleteAnnotation(annotation.id)">
+          <div class="trash-icon-container" (click)="deleteAnnotation($event, annotation.id)">
             <i class="pi pi-trash"></i>
           </div>
         </div>

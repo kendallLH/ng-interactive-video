@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +9,7 @@ export class YoutubeDataApi {
   private http = inject(HttpClient);
   private youtubeApiUrl = 'https://www.googleapis.com/youtube/v3';
 
-  fetchVideoDetails(videoId: string): any {
-    // TODO: Define proper return type
+  fetchVideoDetails(videoId: string): Observable<Object> {
     // Note: Storing the key in this way is bad practice
     // // Theoretically it shouldn't be done at all, realistically this key is restricted to localhost only and is temporary
     // // For simplicity purposes and the sake of the demo, I'm choosing to leave it as plain text temporarily
