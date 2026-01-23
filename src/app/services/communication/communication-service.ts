@@ -1,4 +1,4 @@
-import { Injectable, signal, WritableSignal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Video } from '../../models/video';
@@ -8,13 +8,10 @@ import { Annotation } from '../../models/annotation';
   providedIn: 'root',
 })
 export class CommunicationService {
-  // Observables
   private annotations$: BehaviorSubject<Annotation[]> = new BehaviorSubject<Annotation[]>([]);
   // TODO> any type
   private videoPlayer$: BehaviorSubject<any> = new BehaviorSubject<any>({});
-  private videos$: BehaviorSubject<Video[]> = new BehaviorSubject<Video[]>([]); // TODO: make a videlist type
-
-  /** Observables */
+  private videos$: BehaviorSubject<Video[]> = new BehaviorSubject<Video[]>([]);
 
   setAnnotations(annotations: Annotation[]) {
     this.annotations$.next(annotations);
@@ -26,13 +23,11 @@ export class CommunicationService {
 
   setVideoPlayer(player: any) {
     // TODO: any type
-    console.log('set video player', player);
     this.videoPlayer$.next(player);
   }
 
   getVideoPlayer$(): Observable<any> {
     // TODO: any type
-    console.log('get video player', this.videoPlayer$);
     return this.videoPlayer$.asObservable();
   }
 
@@ -43,14 +38,4 @@ export class CommunicationService {
   getVideos$(): Observable<Video[]> {
     return this.videos$.asObservable();
   }
-
-  /** Signals */
-
-  // setShowInteractiveCard(shouldShow: boolean) {
-  //   this.showInteractiveCard.set(shouldShow);
-  // }
-
-  // getShowInteractiveCard(): WritableSignal<boolean> {
-  //   return this.showInteractiveCard;
-  // }
 }

@@ -3,7 +3,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-import { LocalStorage } from '../../../services/local-storage/local-storage';
+import { LocalStorageService } from '../../../services/local-storage/local-storage-service';
 import { CommunicationService } from '../../../services/communication/communication-service';
 import { LocalStorageConstants } from '../../../shared/constants';
 import { Annotation } from '../../../models/annotation';
@@ -17,14 +17,14 @@ import { Annotation } from '../../../models/annotation';
 export class AnnotationList implements OnInit {
   @Input() videoId: string;
   private communicationService = inject(CommunicationService);
-  private localStorage = inject(LocalStorage);
+  private localStorageService = inject(LocalStorageService);
   annotations$: Observable<any>;
 
   ngOnInit() {
     this.annotations$ = this.communicationService.getAnnotations$().pipe(
       map((annotations) => {
         if (annotations.length === 0) {
-          annotations = this.localStorage.getListItems(LocalStorageConstants.ANNOTATIONS);
+          annotations = this.localStorageService.getListItems(LocalStorageConstants.ANNOTATIONS);
         }
         // Get the annotations associated with this video
         const filteredAnnotations = annotations.filter(
@@ -41,7 +41,7 @@ export class AnnotationList implements OnInit {
 
   deleteAnnotation(event: Event, annotationId: string) {
     event.stopPropagation(); // prevent the parent click action from firing
-    const updatedAnnotations = this.localStorage.removeListItemById(
+    const updatedAnnotations = this.localStorageService.removeListItemById(
       LocalStorageConstants.ANNOTATIONS,
       annotationId,
     );

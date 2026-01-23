@@ -7,7 +7,7 @@ import { LocalStorageConstants } from '../../shared/constants';
 @Injectable({
   providedIn: 'root',
 })
-export class LocalStorage {
+export class LocalStorageService {
   /**
    * Write a value to localStorage under the given key.
    * Serializes objects to JSON; preserves primitive strings as-is.

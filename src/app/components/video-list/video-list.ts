@@ -6,7 +6,7 @@ import { VideoCard } from '../video-card/video-card';
 import { Video } from '../../models/video';
 import { LocalStorageConstants } from '../../shared/constants';
 import { CommunicationService } from '../../services/communication/communication-service';
-import { LocalStorage } from '../../services/local-storage/local-storage';
+import { LocalStorageService } from '../../services/local-storage/local-storage-service';
 
 @Component({
   selector: 'app-video-list',
@@ -15,12 +15,12 @@ import { LocalStorage } from '../../services/local-storage/local-storage';
   styleUrl: './video-list.scss',
 })
 export class VideoList implements OnInit {
-  private localStorage = inject(LocalStorage);
-  private communication = inject(CommunicationService);
+  private localStorageService = inject(LocalStorageService);
+  private communicationService = inject(CommunicationService);
   videos$: Observable<Video[]>;
 
   ngOnInit() {
-    this.videos$ = this.communication.getVideos$().pipe(
+    this.videos$ = this.communicationService.getVideos$().pipe(
       map((videos) => {
         // if (videos.length === 0) {
         //   videos = this.localStorage.getListItems(LocalStorageConstants.VIDEOS);
@@ -34,9 +34,9 @@ export class VideoList implements OnInit {
         return videos;
       }),
     );
-    const storedVideos = this.localStorage.getListItems(LocalStorageConstants.VIDEOS);
+    const storedVideos = this.localStorageService.getListItems(LocalStorageConstants.VIDEOS);
     if (storedVideos && storedVideos.length > 0) {
-      this.communication.setVideos(storedVideos);
+      this.communicationService.setVideos(storedVideos);
     }
   }
 }

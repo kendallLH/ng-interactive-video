@@ -14,7 +14,7 @@ import { take } from 'rxjs';
 import { Annotation, AnnotationType } from '../../../models/annotation';
 import { LocalStorageConstants } from '../../../shared/constants';
 import { CommunicationService } from '../../../services/communication/communication-service';
-import { LocalStorage } from '../../../services/local-storage/local-storage';
+import { LocalStorageService } from '../../../services/local-storage/local-storage-service';
 import { Utilities } from '../../../services/utilities/utilities';
 
 @Component({
@@ -40,7 +40,7 @@ export class AnnotationInput {
   @Input() videoId: string;
   private communicationService = inject(CommunicationService);
   private datePipe = inject(DatePipe);
-  private localStorage = inject(LocalStorage);
+  private localStorageService = inject(LocalStorageService);
   private formBuilder = inject(FormBuilder);
   private utilities = inject(Utilities);
   annotationInputForm!: FormGroup;
@@ -116,7 +116,7 @@ export class AnnotationInput {
         // Update local storage
         // Update annotations$
         this.communicationService.setAnnotations(
-          this.localStorage.addListItem(LocalStorageConstants.ANNOTATIONS, newAnnotation),
+          this.localStorageService.addListItem(LocalStorageConstants.ANNOTATIONS, newAnnotation),
         );
         player.play();
       });

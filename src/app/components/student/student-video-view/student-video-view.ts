@@ -17,7 +17,7 @@ import { Annotation } from '../../../models/annotation';
 import { VideoPlayer } from '../../shared/video-player/video-player';
 import { LocalStorageConstants } from '../../../shared/constants';
 import { CommunicationService } from '../../../services/communication/communication-service';
-import { LocalStorage } from '../../../services/local-storage/local-storage';
+import { LocalStorageService } from '../../../services/local-storage/local-storage-service';
 import { Utilities } from '../../../services/utilities/utilities';
 
 @Component({
@@ -28,9 +28,9 @@ import { Utilities } from '../../../services/utilities/utilities';
 })
 export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
   private appRef = inject(ApplicationRef);
-  private communication = inject(CommunicationService);
+  private communicationService = inject(CommunicationService);
   private injector = inject(EnvironmentInjector);
-  private localStorage = inject(LocalStorage);
+  private localStorageService = inject(LocalStorageService);
   private utilities = inject(Utilities);
 
   // annotations: Annotation[];
@@ -61,7 +61,7 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
   // TODO make an annotation sservice?
 
   getAnnotationsByVideoId() {
-    const allAnnotations = this.localStorage.getListItems(LocalStorageConstants.ANNOTATIONS);
+    const allAnnotations = this.localStorageService.getListItems(LocalStorageConstants.ANNOTATIONS);
     return allAnnotations.filter((annotation: Annotation) => annotation.videoId === this.videoId);
   }
 
@@ -72,7 +72,7 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
 
     const annotations = this.getAnnotationsByVideoId();
 
-    this.playerSubscription = this.communication.getVideoPlayer$().subscribe((player) => {
+    this.playerSubscription = this.communicationService.getVideoPlayer$().subscribe((player) => {
       let lastTriggeredTime = -1; // Prevents multiple triggers within the same second
 
       player.on('timeupdate', () => {

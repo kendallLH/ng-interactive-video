@@ -11,7 +11,7 @@ import { Status, Video } from '../../../models/video';
 import { LocalStorageConstants, RouteConstants } from '../../../shared/constants';
 import { Utilities } from '../../../services/utilities/utilities';
 import { YoutubeDataApi } from '../../../services/youtube-data-api/youtube-data-api';
-import { LocalStorage } from '../../../services/local-storage/local-storage';
+import { LocalStorageService } from '../../../services/local-storage/local-storage-service';
 
 @Component({
   selector: 'app-add-video',
@@ -20,7 +20,7 @@ import { LocalStorage } from '../../../services/local-storage/local-storage';
   styleUrl: './add-video.scss',
 })
 export class AddVideo {
-  private localStorage = inject(LocalStorage);
+  private localStorageService = inject(LocalStorageService);
   private router = inject(Router);
   private utilities = inject(Utilities);
   private youtubeDataApi = inject(YoutubeDataApi);
@@ -51,7 +51,7 @@ export class AddVideo {
         title,
         thumbnail,
       };
-      this.localStorage.addListItem(LocalStorageConstants.VIDEOS, videoDetails);
+      this.localStorageService.addListItem(LocalStorageConstants.VIDEOS, videoDetails);
     });
     this.router.navigate([`/${RouteConstants.VIDEO_VIEW}/teacher`, videoId]);
   }

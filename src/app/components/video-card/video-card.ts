@@ -5,7 +5,7 @@ import { CardModule } from 'primeng/card';
 import { Video } from '../../models/video';
 import { LocalStorageConstants, RouteConstants, UserType } from '../../shared/constants';
 import { CommunicationService } from '../../services/communication/communication-service';
-import { LocalStorage } from '../../services/local-storage/local-storage';
+import { LocalStorageService } from '../../services/local-storage/local-storage-service';
 import { Utilities } from '../../services/utilities/utilities';
 
 @Component({
@@ -16,8 +16,8 @@ import { Utilities } from '../../services/utilities/utilities';
 })
 export class VideoCard implements OnInit {
   @Input() video: Video;
-  private communication = inject(CommunicationService);
-  private localStorage = inject(LocalStorage);
+  private communicationService = inject(CommunicationService);
+  private localStorageService = inject(LocalStorageService);
   private router = inject(Router);
   private utilites = inject(Utilities);
   userType: string;
@@ -34,10 +34,10 @@ export class VideoCard implements OnInit {
   }
 
   removeVideo(videoId: string) {
-    const updatedVideos = this.localStorage.removeListItemById(
+    const updatedVideos = this.localStorageService.removeListItemById(
       LocalStorageConstants.VIDEOS,
       videoId,
     );
-    this.communication.setVideos(updatedVideos);
+    this.communicationService.setVideos(updatedVideos);
   }
 }
