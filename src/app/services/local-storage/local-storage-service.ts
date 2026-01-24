@@ -1,8 +1,7 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { Annotation } from '../../models/annotation';
 import { Video } from '../../models/video';
-import { LocalStorageConstants } from '../../shared/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -48,11 +47,9 @@ export class LocalStorageService {
     const items = this.getListItems(key) || [];
     const index = items.findIndex((index: any) => index.id === updatedItem.id);
     if (index !== -1) {
-      console.log('FOUND INDEX', index);
       items[index] = updatedItem;
     }
     this.setItem(key, items);
-    console.log('NEW ITEMS in update list item ', items);
     return items;
   }
 

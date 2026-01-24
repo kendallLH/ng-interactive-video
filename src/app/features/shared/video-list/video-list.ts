@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { VideoCard } from '../video-card/video-card';
 import { Video } from '../../../models/video';
@@ -20,20 +20,7 @@ export class VideoList implements OnInit {
   videos$: Observable<Video[]>;
 
   ngOnInit() {
-    this.videos$ = this.communicationService.getVideos$().pipe(
-      map((videos) => {
-        // if (videos.length === 0) {
-        //   videos = this.localStorage.getListItems(LocalStorageConstants.VIDEOS);
-        // }
-        // const filteredVideos = videos.filter((videos) =>
-        //   // return if class id matches one of the students class ids that they're taking
-        //   // return if status of the video is teachercompleted
-        // );
-        // return filteredVideos;
-
-        return videos;
-      }),
-    );
+    this.videos$ = this.communicationService.getVideos$();
     const storedVideos = this.localStorageService.getListItems(LocalStorageConstants.VIDEOS);
     if (storedVideos && storedVideos.length > 0) {
       this.communicationService.setVideos(storedVideos);

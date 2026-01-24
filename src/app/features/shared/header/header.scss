@@ -1,8 +1,7 @@
 /* Main Containers */
 .header {
-  padding: 0.5rem 2rem 0rem 2rem; /* had to do it this way b/c of build in <body> margin */
+  padding: 0.5rem 2rem 0rem 2rem;
   top: 0;
-  // overflow: hidden;
 }
 
 /* Positioning */
@@ -31,18 +30,18 @@
 .header-item {
   text-decoration: none;
   color: black;
+  height: 1rem;
 }
 
-.header-item:hover {
+.header-item:hover,
+.account-logo:hover {
   cursor: pointer;
-  color: #c8bdb3;
+  color: gray;
 }
 
 /* Images */
 
 .logo-header {
-  // width: 19rem;
-  // height: 1rem;
   height: 2.1rem;
 }
 

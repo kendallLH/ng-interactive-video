@@ -34,9 +34,8 @@ export class AddVideo {
       const thumbnail = data.items[0].snippet.thumbnails.medium.url;
       const title = data.items[0].snippet.title;
 
-      // Hard-coding the course for now
-      // In production a list of course objects would be provided from an api
-      // We would determine the correct course by comparing the user selection to the api's data
+      // Hard-coding the course for now. In production a list of course objects would be provided from an
+      // api and the correct course would be determined by comparing the user selection to the api data
       const course: Course = {
         id: 1,
         name: this.selectedCourse,

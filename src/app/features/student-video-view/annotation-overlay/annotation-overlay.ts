@@ -3,6 +3,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 
 import { Annotation } from '../../../models/annotation';
+import { MultipleChoiceConstants } from '../../../shared/constants';
 
 @Component({
   selector: 'app-annotation-overlay',
@@ -13,7 +14,12 @@ import { Annotation } from '../../../models/annotation';
 export class AnnotationOverlay {
   @Input() annotation: Annotation;
   @Output() closed = new EventEmitter<boolean>();
-  letters = ['A', 'B', 'C', 'D'];
+  letters = [
+    MultipleChoiceConstants.OPTION_A,
+    MultipleChoiceConstants.OPTION_B,
+    MultipleChoiceConstants.OPTION_C,
+    MultipleChoiceConstants.OPTION_D,
+  ];
   selectedAnswer: string = '';
   visible = true;
 

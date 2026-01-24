@@ -9,7 +9,6 @@ import { Annotation } from '../../models/annotation';
 })
 export class CommunicationService {
   private annotations$: BehaviorSubject<Annotation[]> = new BehaviorSubject<Annotation[]>([]);
-  // TODO> any type
   private videoPlayer$: BehaviorSubject<any> = new BehaviorSubject<any>({});
   private videos$: BehaviorSubject<Video[]> = new BehaviorSubject<Video[]>([]);
 
@@ -22,12 +21,10 @@ export class CommunicationService {
   }
 
   setVideoPlayer(player: any) {
-    // TODO: any type
     this.videoPlayer$.next(player);
   }
 
   getVideoPlayer$(): Observable<any> {
-    // TODO: any type
     return this.videoPlayer$.asObservable();
   }
 

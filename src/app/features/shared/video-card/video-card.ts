@@ -27,8 +27,6 @@ export class VideoCard implements OnInit {
     this.userType = this.utilites.getUserTypeFromUrlPath();
   }
 
-  // TODO - userType and route constants student / teacher are duplicates of each other
-
   viewVideo() {
     this.router.navigate([`/${RouteConstants.VIDEO_VIEW}`, this.userType, this.video.id]);
   }

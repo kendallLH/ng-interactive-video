@@ -40,7 +40,7 @@ export class AnnotationList implements OnInit {
   }
 
   deleteAnnotation(event: Event, annotationId: string) {
-    event.stopPropagation(); // prevent the parent click action from firing
+    event.stopPropagation(); // Prevent the parent click action from firing
     const updatedAnnotations = this.localStorageService.removeListItemById(
       LocalStorageConstants.ANNOTATIONS,
       annotationId,

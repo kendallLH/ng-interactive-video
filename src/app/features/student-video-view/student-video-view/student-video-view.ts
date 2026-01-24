@@ -49,7 +49,8 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
 
   /**
    * Formally unsubscribe to the observable when the component is destroyed.
-   * Unlike the subscriptions in other components that use take(1) or AsyncPipe, this one is not automatically completed
+   * Unlike the subscriptions in other components that use take(1) or AsyncPipe,
+   * this one is not automatically completed.
    */
   ngOnDestroy() {
     this.playerSubscription.unsubscribe();

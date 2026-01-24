@@ -1,8 +1,7 @@
 .video-card {
   max-width: 17rem;
   max-height: 17rem;
-  overflow: hidden; // this is maninly for the image to not overflow the card on top (without this the image corners are not rounded)
-  margin: auto; // this just centers the entire card on the page
+  overflow: hidden;
 }
 
 .video-card:hover {
@@ -30,7 +29,7 @@
 }
 
 .video-title-text {
-  text-overflow: ellipsis; // TOOD: the ellipsis isn't working
+  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   margin-top: -10px;

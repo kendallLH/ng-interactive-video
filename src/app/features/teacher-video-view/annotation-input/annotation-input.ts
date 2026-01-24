@@ -81,7 +81,6 @@ export class AnnotationInput {
     this.annotationPopover.hide();
   }
 
-  // TOOD - move to a service?
   createNewAnnotation() {
     const sharedForm = this.annotationInputForm.get('sharedForm')?.value;
     const contentForm = this.annotationInputForm.get('multiChoiceForm')?.value;
@@ -123,7 +122,6 @@ export class AnnotationInput {
       .getVideoPlayer$()
       .pipe(take(1))
       .subscribe((player: any) => {
-        // TODO: any type
         const newAnnotation = this.createNewAnnotation();
         // Update local storage and annotations$
         this.communicationService.setAnnotations(
