@@ -19,7 +19,7 @@ import { VideoPlayer } from '../../shared/video-player/video-player';
 import { LocalStorageConstants } from '../../../shared/constants';
 import { CommunicationService } from '../../../services/communication/communication-service';
 import { LocalStorageService } from '../../../services/local-storage/local-storage-service';
-import { Utilities } from '../../../services/utilities/utilities';
+import { UtilityService } from '../../../services/utility/utility-service';
 
 @Component({
   selector: 'app-student-video-view',
@@ -32,7 +32,7 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
   private communicationService = inject(CommunicationService);
   private injector = inject(EnvironmentInjector);
   private localStorageService = inject(LocalStorageService);
-  private utilities = inject(Utilities);
+  private utilityService = inject(UtilityService);
 
   // annotations: Annotation[];
   annotationToDisplay: Annotation;
@@ -42,7 +42,7 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
   videoId: string;
 
   ngOnInit() {
-    this.videoId = this.utilities.getVideoIdFromBrowserUrl();
+    this.videoId = this.utilityService.getVideoIdFromBrowserUrl();
     console.log('VIDEO ID', this.videoId);
     console.log('ANNOTATION');
   }

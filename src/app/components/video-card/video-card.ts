@@ -6,7 +6,7 @@ import { Video } from '../../models/video';
 import { LocalStorageConstants, RouteConstants, UserType } from '../../shared/constants';
 import { CommunicationService } from '../../services/communication/communication-service';
 import { LocalStorageService } from '../../services/local-storage/local-storage-service';
-import { Utilities } from '../../services/utilities/utilities';
+import { UtilityService } from '../../services/utility/utility-service';
 
 @Component({
   selector: 'app-video-card',
@@ -19,7 +19,7 @@ export class VideoCard implements OnInit {
   private communicationService = inject(CommunicationService);
   private localStorageService = inject(LocalStorageService);
   private router = inject(Router);
-  private utilites = inject(Utilities);
+  private utilites = inject(UtilityService);
   userType: string;
   userTypeEnum = UserType;
 

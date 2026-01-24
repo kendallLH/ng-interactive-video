@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
-import { Utilities } from '../../../services/utilities/utilities';
+import { UtilityService } from '../../../services/utility/utility-service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,7 @@ import { Utilities } from '../../../services/utilities/utilities';
 })
 export class Header {
   private router = inject(Router);
-  private utilities = inject(Utilities);
+  private utilityService = inject(UtilityService);
 
   routeDashboard() {
     // This only works since we have only two user type options
@@ -23,7 +23,7 @@ export class Header {
 
     // Don't navigate if user hasn't been selected
     if (window.location.pathname !== '/') {
-      const userType = this.utilities.getUserTypeFromUrlPath();
+      const userType = this.utilityService.getUserTypeFromUrlPath();
       this.router.navigate([`/${userType}-dashboard`]);
     }
   }

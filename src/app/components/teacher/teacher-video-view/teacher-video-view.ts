@@ -6,7 +6,7 @@ import { AnnotationList } from '../annotation-list/annotation-list';
 import { AnnotationInput } from '../annotation-input/annotation-input';
 import { VideoPlayer } from '../../shared/video-player/video-player';
 import { CommunicationService } from '../../../services/communication/communication-service';
-import { Utilities } from '../../../services/utilities/utilities';
+import { UtilityService } from '../../../services/utility/utility-service';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -18,13 +18,13 @@ import { take } from 'rxjs/operators';
 export class TeacherVideoView {
   // TODO - service naming is inconsistent!!
   private communicationService = inject(CommunicationService);
-  private utilities = inject(Utilities);
+  private utilityService = inject(UtilityService);
   isAddAnnotation: WritableSignal<boolean>;
   timestamp: number;
   videoId: string;
 
   ngOnInit() {
-    this.videoId = this.utilities.getVideoIdFromBrowserUrl();
+    this.videoId = this.utilityService.getVideoIdFromBrowserUrl();
   }
 
   /**

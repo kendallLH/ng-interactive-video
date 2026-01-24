@@ -9,8 +9,8 @@ import { SelectModule } from 'primeng/select';
 import { Course } from '../../../models/course';
 import { Status, Video } from '../../../models/video';
 import { LocalStorageConstants, RouteConstants } from '../../../shared/constants';
-import { Utilities } from '../../../services/utilities/utilities';
-import { YoutubeDataApi } from '../../../services/youtube-data-api/youtube-data-api';
+import { UtilityService } from '../../../services/utility/utility-service';
+import { YoutubeDataService } from '../../../services/youtube-data/youtube-data-service';
 import { LocalStorageService } from '../../../services/local-storage/local-storage-service';
 
 @Component({
@@ -22,16 +22,16 @@ import { LocalStorageService } from '../../../services/local-storage/local-stora
 export class AddVideo {
   private localStorageService = inject(LocalStorageService);
   private router = inject(Router);
-  private utilities = inject(Utilities);
-  private youtubeDataApi = inject(YoutubeDataApi);
+  private utilityService = inject(UtilityService);
+  private youtubeDataService = inject(YoutubeDataService);
   inputUrl: string = '';
   // TODO - put this in a mocks folder or something
   classOptions = ['Algebra 1', 'Algebra 2', 'Calculus 1', 'Calculus 2', 'Korean 1', 'Korean 2'];
   selectedCourse: string = '';
 
   onSubmit() {
-    const videoId = this.utilities.getVideoIdFromYouTubeUrl(this.inputUrl);
-    this.youtubeDataApi.fetchVideoDetails(videoId).subscribe((data: any) => {
+    const videoId = this.utilityService.getVideoIdFromYouTubeUrl(this.inputUrl);
+    this.youtubeDataService.fetchVideoDetails(videoId).subscribe((data: any) => {
       const thumbnail = data.items[0].snippet.thumbnails.medium.url;
       const title = data.items[0].snippet.title;
 

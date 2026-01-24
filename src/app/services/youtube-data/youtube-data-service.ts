@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class YoutubeDataApi {
+export class YoutubeDataService {
   private http = inject(HttpClient);
   private youtubeApiUrl = 'https://www.googleapis.com/youtube/v3';
 

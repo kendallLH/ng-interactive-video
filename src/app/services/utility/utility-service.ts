@@ -6,7 +6,7 @@ import { LocalStorageConstants, UserType } from '../../shared/constants';
 @Injectable({
   providedIn: 'root',
 })
-export class Utilities {
+export class UtilityService {
   private localStorageService = inject(LocalStorageService);
 
   getSecondsFromHHMMSS(timeString: string): number {

@@ -15,7 +15,7 @@ import { Annotation, AnnotationType } from '../../../models/annotation';
 import { LocalStorageConstants } from '../../../shared/constants';
 import { CommunicationService } from '../../../services/communication/communication-service';
 import { LocalStorageService } from '../../../services/local-storage/local-storage-service';
-import { Utilities } from '../../../services/utilities/utilities';
+import { UtilityService } from '../../../services/utility/utility-service';
 
 @Component({
   selector: 'app-annotation-input',
@@ -42,7 +42,7 @@ export class AnnotationInput {
   private datePipe = inject(DatePipe);
   private localStorageService = inject(LocalStorageService);
   private formBuilder = inject(FormBuilder);
-  private utilities = inject(Utilities);
+  private utilityService = inject(UtilityService);
   annotationInputForm!: FormGroup;
   annotationTypeOptions = [AnnotationType.MultipleChoice];
   // In future will have
@@ -96,7 +96,9 @@ export class AnnotationInput {
         // In future would conditionally create contentForm and newContent based on form type
         const contentForm = this.annotationInputForm.get('multiChoiceForm')?.value;
         console.log('timestamp', sharedForm.timestampPicker);
-        const timestampInSeconds = this.utilities.getSecondsFromHHMMSS(sharedForm.timestampPicker);
+        const timestampInSeconds = this.utilityService.getSecondsFromHHMMSS(
+          sharedForm.timestampPicker,
+        );
 
         const newAnnotation: Annotation = {
           id: annotationId,
