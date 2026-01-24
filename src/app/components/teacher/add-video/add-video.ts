@@ -25,7 +25,6 @@ export class AddVideo {
   private utilityService = inject(UtilityService);
   private youtubeDataService = inject(YoutubeDataService);
   inputUrl: string = '';
-  // TODO - put this in a mocks folder or something
   classOptions = ['Algebra 1', 'Algebra 2', 'Calculus 1', 'Calculus 2', 'Korean 1', 'Korean 2'];
   selectedCourse: string = '';
 
@@ -35,10 +34,9 @@ export class AddVideo {
       const thumbnail = data.items[0].snippet.thumbnails.medium.url;
       const title = data.items[0].snippet.title;
 
-      // TODO - video shoudl not be submitted until annotations are done, but teachers need to be able to see in progress videos
-      // hardcoded for now
-      // in theory course list would be grabbed on init of user and stored in a service
-      // for now it's hard coded, but mimics if we had grabbed it from an api on load of the user's account
+      // Hard-coding the course for now
+      // In production a list of course objects would be provided from an api
+      // We would determine the correct course by comparing the user selection to the api's data
       const course: Course = {
         id: 1,
         name: this.selectedCourse,

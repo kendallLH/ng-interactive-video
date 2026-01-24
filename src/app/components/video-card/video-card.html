@@ -5,7 +5,7 @@
   <ng-template #title class="card-title"> </ng-template>
   <div class="card-title-container">
     <div class="video-title-text">{{ video.title }}</div>
-    <div class="class-name-text">{{ video.course?.name }}</div>
+    <div class="class-name-text">{{ video.course.name }}</div>
   </div>
 </p-card>
 @if (userType === userTypeEnum.Teacher) {

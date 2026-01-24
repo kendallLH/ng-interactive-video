@@ -16,7 +16,6 @@ import { take } from 'rxjs/operators';
   styleUrl: './teacher-video-view.scss',
 })
 export class TeacherVideoView {
-  // TODO - service naming is inconsistent!!
   private communicationService = inject(CommunicationService);
   private utilityService = inject(UtilityService);
   isAddAnnotation: WritableSignal<boolean>;

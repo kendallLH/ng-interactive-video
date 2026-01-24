@@ -31,48 +31,17 @@
       </div>
 
       <div class="multi-choice-options" formGroupName="multiChoiceForm">
-        <!-- TODO - best practice would be to use constants for these options-->
-        <p-inputgroup>
-          <!-- TODO - change this to a for loop so can loop through options array to add answers -->
-          <!-- so only this one has class working and for some rason only D keeps setting active class by default when it shouldn't-->
-          <p-inputgroup-addon
-            class="multiple-choice"
-            [class.active]="correctAnswer === 'A'"
-            (click)="setCorrectAnswer('A')"
-            >A</p-inputgroup-addon
-          >
-          <input pInputText placeholder="Answer A" formControlName="optionA" />
-        </p-inputgroup>
-
-        <p-inputgroup>
-          <p-inputgroup-addon
-            class="multiple-choice"
-            [class.active]="correctAnswer === 'B'"
-            (click)="setCorrectAnswer('B')"
-            >B</p-inputgroup-addon
-          >
-          <input pInputText placeholder="Answer B" formControlName="optionB" />
-        </p-inputgroup>
-
-        <p-inputgroup>
-          <p-inputgroup-addon
-            class="multiple-choice"
-            [class.active]="correctAnswer === 'C'"
-            (click)="setCorrectAnswer('C')"
-            >C</p-inputgroup-addon
-          >
-          <input pInputText placeholder="Answer C" formControlName="optionC" />
-        </p-inputgroup>
-
-        <p-inputgroup>
-          <p-inputgroup-addon
-            class="multiple-choice"
-            [class.active]="correctAnswer === 'D'"
-            (click)="setCorrectAnswer('D')"
-            >D</p-inputgroup-addon
-          >
-          <input pInputText placeholder="Answer D" formControlName="optionD" />
-        </p-inputgroup>
+        @for (option of multipleChoiceOptions; track option) {
+          <p-inputgroup>
+            <p-inputgroup-addon
+              class="multiple-choice"
+              [class.active]="correctAnswer === option"
+              (click)="setCorrectAnswer(option)"
+              >{{ option }}</p-inputgroup-addon
+            >
+            <input pInputText [formControlName]="'option' + option" />
+          </p-inputgroup>
+        }
       </div>
 
       <div class="info-text">Select A, B, C, or D to set the correct answer</div>

@@ -23,7 +23,7 @@ import { UtilityService } from '../../../services/utility/utility-service';
 
 @Component({
   selector: 'app-student-video-view',
-  imports: [AnnotationOverlay, VideoPlayer],
+  imports: [VideoPlayer],
   templateUrl: './student-video-view.html',
   styleUrl: './student-video-view.scss',
 })
@@ -33,8 +33,6 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
   private injector = inject(EnvironmentInjector);
   private localStorageService = inject(LocalStorageService);
   private utilityService = inject(UtilityService);
-
-  // annotations: Annotation[];
   annotationToDisplay: Annotation;
   playerSubscription: Subscription;
   showAnnotation: boolean = false;
@@ -43,8 +41,6 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnInit() {
     this.videoId = this.utilityService.getVideoIdFromBrowserUrl();
-    console.log('VIDEO ID', this.videoId);
-    console.log('ANNOTATION');
   }
 
   ngAfterViewInit() {
@@ -53,13 +49,11 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
 
   /**
    * Formally unsubscribe to the observable when the component is destroyed.
-   * Unlike subscriptions the subscriptions in other components that use take(1) or AsyncPipe, this one is not automatically completed
+   * Unlike the subscriptions in other components that use take(1) or AsyncPipe, this one is not automatically completed
    */
   ngOnDestroy() {
     this.playerSubscription.unsubscribe();
   }
-
-  // TODO make an annotation sservice?
 
   getAnnotationsByVideoId() {
     const allAnnotations = this.localStorageService.getListItems(LocalStorageConstants.ANNOTATIONS);
@@ -67,37 +61,24 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
   }
 
   displayAnnotations() {
-    console.log('in display annotations');
-    // would get this from an api and/or a shared service. not necessary in this case since it's easy
-    // to grab from local storage. if you can keep it simple, then do
-
     const annotations = this.getAnnotationsByVideoId();
-
     this.playerSubscription = this.communicationService.getVideoPlayer$().subscribe((player) => {
-      let lastTriggeredTime = -1; // Prevents multiple triggers within the same second
-
+      let lastTriggeredTime = -1;
       player.on('timeupdate', () => {
-        var currentTime = Math.floor(player.currentTime()); // Round time to whole seconds
+        // Round time to whole seconds
+        var currentTime = Math.floor(player.currentTime());
         // Prevent multiple triggers within the same second
         if (currentTime === lastTriggeredTime) return;
         lastTriggeredTime = currentTime;
 
-        console.log('this.annotations before the for loop', annotations);
         annotations.forEach((annotation: Annotation) => {
-          // i don't think filtered annotations will work as is
-          console.log('ANNOTATION', annotation);
-          console.log('CURRENT TIME', currentTime);
-          console.log('this video id', this.videoId);
-          // if annotation id === any annotiation id listed in user response then
           if (
-            // annotation.videoId === this.videoId &&
             annotation.timestamp === currentTime &&
-            this.trackTimestamp.indexOf(annotation.timestamp) === -1 // can i use user response here instead?
+            this.trackTimestamp.indexOf(annotation.timestamp) === -1
           ) {
-            player.pause(); // Pause the video
+            player.pause();
             player.controls(false);
             this.showAnnotationOverlay(annotation);
-
             this.trackTimestamp.push(annotation.timestamp); // Mark this timestamp as answered
           }
         });

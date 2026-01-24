@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { Route, Router, RouterLink } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { CardModule } from 'primeng/card';
 
 import { Video } from '../../models/video';
@@ -10,7 +10,7 @@ import { UtilityService } from '../../services/utility/utility-service';
 
 @Component({
   selector: 'app-video-card',
-  imports: [CardModule, RouterLink],
+  imports: [CardModule],
   templateUrl: './video-card.html',
   styleUrl: './video-card.scss',
 })
