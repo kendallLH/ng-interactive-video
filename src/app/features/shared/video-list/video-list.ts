@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
-import { VideoCard } from '../../student/video-card/video-card';
+import { VideoCard } from '../video-card/video-card';
 import { Video } from '../../../models/video';
 import { LocalStorageConstants } from '../../../shared/constants';
 import { CommunicationService } from '../../../services/communication/communication-service';

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-
-import { VideoList } from '../../shared/video-list/video-list';
+import { VideoList } from '../shared/video-list/video-list';
 
 @Component({
   selector: 'app-student-dashboard',

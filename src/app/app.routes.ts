@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 
-import { Login } from './components/login/login/login';
-import { StudentDashboard } from './components/student/student-dashboard/student-dashboard';
-import { StudentVideoView } from './components/student/student-video-view/student-video-view';
-import { TeacherDashboard } from './components/teacher/teacher-dashboard/teacher-dashboard';
-import { TeacherVideoView } from './components/teacher/teacher-video-view/teacher-video-view';
+import { Login } from './features/login/login/login';
+import { StudentDashboard } from './features/student-dashboard/student-dashboard';
+import { StudentVideoView } from './features/student-video-view/student-video-view/student-video-view';
+import { TeacherDashboard } from './features/teacher-dashboard/teacher-dashboard/teacher-dashboard';
+import { TeacherVideoView } from './features/teacher-video-view/teacher-video-view/teacher-video-view';
 import { RouteConstants } from './shared/constants';
 
 export const routes: Routes = [
