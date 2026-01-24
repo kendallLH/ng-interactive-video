@@ -14,12 +14,19 @@
   </a>
 </div>
 <div class="button-container">
-  <button pButton class="mock-data-button" type="button" label="Add Mock Data" severity="secondary">
-    <i class="pi pi-info-circle tooltip-icon" [pTooltip]="tooltipContent"></i>
+  <button
+    pButton
+    class="mock-data-button"
+    type="button"
+    label="Add Mock Data"
+    severity="secondary"
+    (click)="addMockData()"
+  >
+    <i class="pi pi-info-circle tooltip-icon" [pTooltip]="tooltipContent" tooltipPosition="top"></i>
     <ng-template #tooltipContent>
       <div>Pre-populate mock videos and annotations.</div>
       <br />
-      <div>You can still add and delete videos from the teacher dashboard.</div>
+      <div>Existing data will be overridden</div>
     </ng-template>
   </button>
 </div>

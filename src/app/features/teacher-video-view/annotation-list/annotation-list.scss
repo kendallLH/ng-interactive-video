@@ -48,7 +48,7 @@
   flex-direction: column;
   margin-top: 2rem;
   opacity: 80%;
-  height: 25rem;
+  color: var(--p-primary-color);
 }
 
 .annotation-text-content {
@@ -62,6 +62,7 @@
 .no-annotations-icon {
   font-size: 3rem;
   padding-bottom: 0.5rem;
+  color: var(--p-primary-color);
 }
 
 .annotation-list {
