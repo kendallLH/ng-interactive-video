@@ -82,7 +82,6 @@
         <button
           pButton
           label="Submit"
-          severity="contrast"
           (click)="submitCard()"
           [disabled]="!annotationInputForm.valid"
         ></button>
@@ -96,5 +95,4 @@
   (click)="popover.toggle($event)"
   icon="pi pi-pen-to-square"
   label="Add Annotation"
-  severity="contrast"
 ></button>

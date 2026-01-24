@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { LocalStorageConstants, UserType } from '../../shared/constants';
 import { LocalStorageService } from '../local-storage/local-storage-service';
 import { mockAnnotations, mockVideos } from '../../shared/mocks';
+import { LocalStorageConstants, UserType } from '../../shared/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +40,6 @@ export class Utilities {
   }
 
   prePopulateData() {
-    //localstorage.setitem() {}
     this.localStorageService.setItem(LocalStorageConstants.VIDEOS, mockVideos);
     this.localStorageService.setItem(LocalStorageConstants.ANNOTATIONS, mockAnnotations);
   }

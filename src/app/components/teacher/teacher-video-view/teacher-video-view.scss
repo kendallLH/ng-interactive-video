@@ -13,6 +13,7 @@
   width: 70%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   height: calc(
     100vh - 160px
   ); // this is hardcoded right now, not good practice would want to update in future

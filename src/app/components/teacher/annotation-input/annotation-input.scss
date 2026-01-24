@@ -41,34 +41,13 @@
   border: 1px solid var(--p-primary-color);
 }
 
-// todo this is a duplicate in styles.scss but for somer eason it only works here
 .active {
   color: var(--p-primary-color);
   background-color: rgba(188, 245, 192, 0.143);
   border: 1px solid var(--p-primary-color);
 }
 
-// tODO - is this doing anything?
 .p-button,
 .p-button-primary {
   width: 100%;
-}
-
-:host ::ng-deep {
-  // TODO - secondary input button style
-  // background-color: white;
-  // box-shadow: 0 1px 2px 0 rgba(18, 18, 23, 0.05);
-  // border: 1px solid lightgray;
-
-  // .popover-content .p-ripple .p-button {
-  //   width: 20rem;
-  // }
-
-  // TODO - are these doing anything?
-  .annotation-popover-container > .p-button {
-    width: 100%;
-  }
-  app-annotation-input > p-button {
-    width: 100%;
-  }
 }

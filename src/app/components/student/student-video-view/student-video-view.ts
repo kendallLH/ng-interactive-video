@@ -9,8 +9,9 @@ import {
   OnInit,
   AfterViewInit,
   OnDestroy,
+  ComponentRef,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 
 import { AnnotationOverlay } from '../annotation-overlay/annotation-overlay';
 import { Annotation } from '../../../models/annotation';
@@ -114,18 +115,29 @@ export class StudentVideoView implements AfterViewInit, OnInit, OnDestroy {
       bindings: [
         inputBinding('annotation', () => annotation),
         outputBinding('closed', () => {
-          // TODO
-          //player.play();
-          //player.controls(true);
-          console.log('CLOSED');
-          document.body.removeChild(host);
-          this.appRef.detachView(ref.hostView);
-          ref.destroy();
+          this.onCloseOverlay(host, ref);
         }),
       ],
     });
-    // Registers the component’s view so it participates in change detection cycle.
+    // Registers the component’s view so it participates in change detection cycle
     this.appRef.attachView(ref.hostView);
     document.body.appendChild(host);
+  }
+
+  onCloseOverlay(host: HTMLElement, ref: ComponentRef<AnnotationOverlay>) {
+    // Play the player and reset controls
+    this.communicationService
+      .getVideoPlayer$()
+      .pipe(take(1))
+      .subscribe((player) => {
+        player.controls(true);
+        player.play();
+      });
+
+    // Destroy the element ref and styling
+    document.body.classList.remove('p-overflow-hidden'); // Bug in PrimeNg: https://github.com/primefaces/primeng/issues/19251
+    document.body.removeChild(host);
+    this.appRef.detachView(ref.hostView);
+    ref.destroy();
   }
 }
