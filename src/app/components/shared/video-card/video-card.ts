@@ -2,11 +2,11 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { CardModule } from 'primeng/card';
 
-import { Video } from '../../models/video';
-import { LocalStorageConstants, RouteConstants, UserType } from '../../shared/constants';
-import { CommunicationService } from '../../services/communication/communication-service';
-import { LocalStorageService } from '../../services/local-storage/local-storage-service';
-import { UtilityService } from '../../services/utility/utility-service';
+import { Video } from '../../../models/video';
+import { LocalStorageConstants, RouteConstants, UserType } from '../../../shared/constants';
+import { CommunicationService } from '../../../services/communication/communication-service';
+import { LocalStorageService } from '../../../services/local-storage/local-storage-service';
+import { UtilityService } from '../../../services/utility/utility-service';
 
 @Component({
   selector: 'app-video-card',

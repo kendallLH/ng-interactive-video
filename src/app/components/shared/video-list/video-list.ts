@@ -2,11 +2,11 @@ import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
-import { VideoCard } from '../video-card/video-card';
-import { Video } from '../../models/video';
-import { LocalStorageConstants } from '../../shared/constants';
-import { CommunicationService } from '../../services/communication/communication-service';
-import { LocalStorageService } from '../../services/local-storage/local-storage-service';
+import { VideoCard } from '../../student/video-card/video-card';
+import { Video } from '../../../models/video';
+import { LocalStorageConstants } from '../../../shared/constants';
+import { CommunicationService } from '../../../services/communication/communication-service';
+import { LocalStorageService } from '../../../services/local-storage/local-storage-service';
 
 @Component({
   selector: 'app-video-list',
