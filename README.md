@@ -2,6 +2,13 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
 
+# Demo Video
+
+Full resolution video can be found [here](https://drive.google.com/file/d/1_kzDlqaNMwj1F5ANFL9ESUGffBcA4O98/view?usp=sharing)
+
+https://github.com/user-attachments/assets/bd110036-f4fc-4a6f-adc3-ee52a76af646
+
+
 # Getting Started
 
 This project uses Angular, Node.js, and npm. The below steps will walk you through installation in order to view the app locally on [http://localhost:4200](http://localhost:4200/). If you already have node and npm installed on your computer, ensure you are using v22.12.0. You may skip Step 1
@@ -69,7 +76,6 @@ Wait until it completes. You should see something like **Local: http://localhost
 In a browser tab navigate to http://localhost:4200/. You should see a view where you're able to select "Teacher" or "Student". You're now able to navigate through the app!
 
 <br>
-<br>
 
 # Development Documentation
 
@@ -125,7 +131,6 @@ This service is used to house core communication variables such as observables a
 - This repo uses constants for consistency, readability, and duplication prevention. Additionally they reduce the risk of errors from hard-coded values and make future updates easier and safer.
 - Models are used to define shared types across the repository, providing a single source of truth for data structures. They promote consistency, improve type safety, and help developers clearly understand what data is required when creating or passing objects throughout the codebase.
 
-<br>
 <br>
 
 # Future Enhancements
